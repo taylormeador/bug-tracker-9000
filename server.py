@@ -65,7 +65,7 @@ def callback_handling():
 
 @app.route('/login')
 def login():
-    return auth0.authorize_redirect(redirect_uri='YOUR_CALLBACK_URL')
+    return auth0.authorize_redirect(redirect_uri='http://bug-tracker-9000.herokuapp.com')
 
 
 @app.route('/dashboard')
