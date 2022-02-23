@@ -17,6 +17,14 @@ import redis
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
 
+# Configure Redis for storing the session data on the server-side
+redis_url = os.getenv('REDISTOGO_URL')
+redis = redis.from_url(redis_url)
+app.config['SESSION_TYPE'] = 'redis'
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_USE_SIGNER'] = True
+app.config['SESSION_REDIS'] = redis
+
 oauth = OAuth(app)
 
 auth0 = oauth.register(
@@ -30,14 +38,6 @@ auth0 = oauth.register(
         'scope': 'openid profile email',
     },
 )
-
-# Configure Redis for storing the session data on the server-side
-redis_url = os.getenv('REDISTOGO_URL')
-redis = redis.from_url(redis_url)
-app.config['SESSION_TYPE'] = 'redis'
-app.config['SESSION_PERMANENT'] = False
-app.config['SESSION_USE_SIGNER'] = True
-app.config['SESSION_REDIS'] = redis
 
 
 def requires_auth(f):
