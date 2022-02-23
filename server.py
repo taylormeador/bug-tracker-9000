@@ -23,9 +23,9 @@ oauth = OAuth(app)
 
 auth0 = oauth.register(
     'auth0',
-    client_id='O2T6ruq8JqRddPi1bSXhEgxFvf6Ter0j',
+    client_id='jPZYhRfytp9AO0gav3OdHpY4mPxHQPUG',
     client_secret=os.getenv('AUTH0_CLIENT_SECRET'),
-    api_base_url='withered-waterfall-9426.us.auth0.com',
+    api_base_url='dev--3rx-kw1.us.auth0.com',
     access_token_url='https://dev--3rx-kw1.us.auth0.com/oauth/token',
     authorize_url='https://dev--3rx-kw1.us.auth0.com/authorize',
     client_kwargs={
