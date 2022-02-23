@@ -50,6 +50,7 @@ def requires_auth(f):
 def callback_handling():
     # Handles response from token endpoint
     auth0.authorize_access_token()
+    return auth0
     resp = auth0.get('userinfo')
     userinfo = resp.json()
 
@@ -81,7 +82,7 @@ def logout():
     # Clear session stored data
     session.clear()
     # Redirect user to logout endpoint
-    params = {'returnTo': url_for('home', _external=True), 'client_id': 'jPZYhRfytp9AO0gav3OdHpY4mPxHQPUG'}
+    params = {'returnTo': url_for('/', _external=True), 'client_id': 'jPZYhRfytp9AO0gav3OdHpY4mPxHQPUG'}
     return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
 
