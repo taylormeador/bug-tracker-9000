@@ -41,7 +41,7 @@ def requires_auth(f):
             return redirect('/')
         return f(*args, **kwargs)
 
-        return decorated
+    return decorated
 
 
 # Here we're using the /callback route.
