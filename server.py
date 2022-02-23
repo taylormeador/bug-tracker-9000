@@ -3,6 +3,7 @@
 from functools import wraps
 import json
 from os import environ as env
+import os
 from werkzeug.exceptions import HTTPException
 
 from dotenv import load_dotenv, find_dotenv
@@ -22,7 +23,7 @@ oauth = OAuth(app)
 auth0 = oauth.register(
     'auth0',
     client_id='O2T6ruq8JqRddPi1bSXhEgxFvf6Ter0j',
-    client_secret=env('AUTH0_CLIENT_SECRET'),
+    client_secret=os.getenv('AUTH0_CLIENT_SECRET'),
     api_base_url='withered-waterfall-9426.us.auth0.com',
     access_token_url='https://dev--3rx-kw1.us.auth0.com/oauth/token',
     authorize_url='https://dev--3rx-kw1.us.auth0.com/authorize',
