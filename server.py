@@ -2,10 +2,8 @@
 
 from functools import wraps
 import json
-from os import environ as env
 import os
 from werkzeug.exceptions import HTTPException
-from dotenv import load_dotenv, find_dotenv
 from flask import Flask
 from flask import jsonify
 from flask import redirect
