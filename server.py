@@ -92,6 +92,5 @@ def logout():
 
 
 @app.route('/')
-@requires_auth
 def index():
     return render_template('index.html')
