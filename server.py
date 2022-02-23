@@ -17,6 +17,7 @@ import redis
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
 
+
 oauth = OAuth(app)
 
 auth0 = oauth.register(
