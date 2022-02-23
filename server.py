@@ -56,7 +56,7 @@ def requires_auth(f):
 def callback_handling():
     # Handles response from token endpoint
     auth0.authorize_access_token()
-    resp = auth0.get('https://userinfo')
+    resp = auth0.get('https://dev--3rx-kw1.us.auth0.com/userinfo')
     userinfo = resp.json()
 
     # Store the user information in flask session.
