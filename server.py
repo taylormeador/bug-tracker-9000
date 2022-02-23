@@ -50,7 +50,7 @@ def requires_auth(f):
 def callback_handling():
     # Handles response from token endpoint
     auth0.authorize_access_token()
-    return auth0
+    return auth0.get('client_id')
     resp = auth0.get('userinfo')
     userinfo = resp.json()
 
