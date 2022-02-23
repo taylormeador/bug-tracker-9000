@@ -17,6 +17,7 @@ from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 
 app = Flask(__name__)
+app.secret_key = os.getenv('FLASK_APP_SECRET')
 
 oauth = OAuth(app)
 
