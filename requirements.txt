@@ -1,2 +1,8 @@
 Flask==2.0.2
 gunicorn==20.1.0
+python-dotenv
+python-jose
+flask-cors
+six
+requests
+authlib
