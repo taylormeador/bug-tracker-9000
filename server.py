@@ -5,7 +5,6 @@ import json
 from os import environ as env
 import os
 from werkzeug.exceptions import HTTPException
-
 from dotenv import load_dotenv, find_dotenv
 from flask import Flask
 from flask import jsonify
@@ -15,6 +14,7 @@ from flask import session
 from flask import url_for
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
+import redis
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
@@ -33,6 +33,14 @@ auth0 = oauth.register(
     },
 )
 
+# Configure Redis for storing the session data on the server-side
+redis_url = os.getenv('REDISTOGO_URL')
+redis = redis.from_url(redis_url)
+app.config['SESSION_TYPE'] = 'redis'
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_USE_SIGNER'] = True
+app.config['SESSION_REDIS'] = redis
+
 
 def requires_auth(f):
     @wraps(f)
@@ -50,7 +58,7 @@ def requires_auth(f):
 def callback_handling():
     # Handles response from token endpoint
     auth0.authorize_access_token()
-    resp = auth0.get('https://userinfo')
+    resp = auth0.get('userinfo')
     userinfo = resp.json()
 
     # Store the user information in flask session.
