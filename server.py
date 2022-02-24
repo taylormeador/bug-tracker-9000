@@ -40,7 +40,7 @@ auth0 = oauth.register(
 )
 
 
-def requires_auth(f):
+def requires_authentication(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         if 'profile' not in session:
@@ -74,15 +74,6 @@ def login():
     return auth0.authorize_redirect(redirect_uri='https://bug-tracker-9000.herokuapp.com/callback')
 
 
-@app.route('/')
-@app.route('/dashboard')
-@requires_auth
-def dashboard():
-    return render_template('dashboard.html',
-                           userinfo=session['profile'],
-                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4))
-
-
 @app.route('/logout')
 def logout():
     # Clear session stored data
@@ -91,3 +82,22 @@ def logout():
     params = {'returnTo': url_for('login', _external=True), 'client_id': 'jPZYhRfytp9AO0gav3OdHpY4mPxHQPUG'}
     return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
+
+@app.route('/')
+@app.route('/dashboard')
+@requires_authentication
+def dashboard():
+    return render_template('dashboard.html',
+                           userinfo=session['profile'],
+                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4))
+
+
+@app.route('/tickets')
+def tickets():
+    return render_template('tickets.html')
+
+
+@app.route('/admin')
+# @requires_authorization
+def tickets():
+    return render_template('admin.html')
