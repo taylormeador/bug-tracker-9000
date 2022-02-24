@@ -23,10 +23,9 @@
           <textarea class="form-control" id="projectDescriptionInput" rows="3"></textarea>
         </div>
           <select class="form-select" multiple aria-label="multiple select example">
-              <option selected>Open this select menu</option>
-              <option value="Dev 1">Dev One</option>
-              <option value="Dev 2">Dev Two</option>
-              <option value="Dev 3">Dev Three</option>
+              {% for user in users %}
+                <option value="{{ user }}">{{ user }}</option>
+              {% endfor %}
           </select>
       </div>
       <div class="modal-footer">
