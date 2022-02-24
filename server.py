@@ -99,5 +99,5 @@ def tickets():
 
 @app.route('/admin')
 # @requires_authorization
-def tickets():
+def admin():
     return render_template('admin.html')
