@@ -14,7 +14,20 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        This is a test
+        <div class="mb-3">
+          <label for="projectNameInput" class="form-label">Project Name</label>
+          <input type="email" class="form-control" id="projectNameInput" placeholder="New Project">
+        </div>
+        <div class="mb-3">
+          <label for="projectDescriptionInput" class="form-label">Project Description</label>
+          <textarea class="form-control" id="projectDescriptionInput" rows="3"></textarea>
+        </div>
+          <select class="form-select" multiple aria-label="multiple select example">
+              <option selected>Open this select menu</option>
+              <option value="Dev 1">Dev One</option>
+              <option value="Dev 2">Dev Two</option>
+              <option value="Dev 3">Dev Three</option>
+          </select>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
