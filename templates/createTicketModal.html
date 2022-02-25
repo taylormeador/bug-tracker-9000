@@ -18,48 +18,55 @@
           <label for="ticketDescriptionInput" class="form-label">Ticket Description</label>
           <textarea class="form-control" id="ticketDescriptionInput" rows="3"></textarea>
         </div>
-          <div class="mb-3">
+            <div class="mb-3">
               <label for="ticketTimeInput" class="form-label">Time Estimate</label>
               <input class="form-control" id="ticketTimeInput" placeholder="1 hour">
             </div>
-            <select class="form-select" aria-label="selectTicketType">
-              <option value="Bug">Bug</option>
-              <option value="Issue">Issue</option>
-              <option value="Feature Request">Feature Request</option>
-            </select>
+            <div class="mb-3">
+              <label for="ticketTypeInput" class="form-label">Ticket Type</label>
+                <select class="form-select" id="ticketTypeInput" aria-label="selectTicketType">
+                  <option value="Bug">Bug</option>
+                  <option value="Issue">Issue</option>
+                  <option value="Feature Request">Feature Request</option>
+                </select>
+            </div>
 
-            <select class="form-select" aria-label="selectTicketStatus">
+        <div class="mb-3">
+          <label for="ticketStatusInput" class="form-label">Ticket Status</label>
+            <select class="form-select" id="ticketStatusInput" aria-label="selectTicketStatus">
               <option value="New">New</option>
               <option value="In Progress">In Progress</option>
               <option value="Resolved">Resolved</option>
             </select>
+        </div>
 
-            <select class="form-select" aria-label="selectTicketPriority">
+        <div class="mb-3">
+          <label for="ticketPriorityInput" class="form-label">Ticket Priority</label>
+            <select class="form-select" id="ticketPriorityInput" aria-label="selectTicketPriority">
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
                 <option value="Immediate">Immediate</option>
             </select>
+        </div>
 
-            <select class="form-select" aria-label="selectTicketPriority">
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-                <option value="Immediate">Immediate</option>
-            </select>
-
-            <select class="form-select" multiple aria-label="multiple select example">
+        <div class="mb-3">
+          <label for="projectSelectInput" class="form-label">Select Project</label>
+            <select class="form-select" id="projectSelectInput" multiple aria-label="multiple select example">
               {% for project in projects %}
                 <option value="{{ project }}">{{ project }}</option>
               {% endfor %}
             </select>
+        </div>
 
-            <select class="form-select" multiple aria-label="multiple select example">
+        <div class="mb-3">
+          <label for="userSelectInput" class="form-label">Assign Personnel</label>
+            <select class="form-select" id="userSelectInput" multiple aria-label="multiple select example">
               {% for user in users %}
                 <option value="{{ user }}">{{ user }}</option>
               {% endfor %}
             </select>
-
+        </div>
 
       </div>
       <div class="modal-footer">

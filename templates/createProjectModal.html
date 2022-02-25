@@ -18,16 +18,17 @@
           <label for="projectDescriptionInput" class="form-label">Project Description</label>
           <textarea class="form-control" id="projectDescriptionInput" rows="3"></textarea>
         </div>
-          <select class="form-select" multiple aria-label="multiple select example">
+          <label for="selectUsersInput" class="form-label">Assign Personnel</label>
+          <select class="form-select" id="selectUsersInput" multiple aria-label="multiple select example">
               {% for user in users %}
                 <option value="{{ user }}">{{ user }}</option>
               {% endfor %}
           </select>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Create Project</button>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Create Project</button>
+        </div>
     </div>
   </div>
 </div>
