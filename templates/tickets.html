@@ -36,4 +36,30 @@
     </table>
 </div>
 
+<div class="container shadow p-3 mb-5 bg-body rounded" id="selectedTicketContainer">
+  <div class="container" id="selectedTicketContainerHeader">
+    <div class="d-flex justify-content-start">
+      <h4>Selected Ticket Info</h4>
+    </div>
+  </div>
+
+  <div class="container" id="selectedTicketMainContainer">
+
+    <div class="container" id="selectedTicketInfoContainer">
+    </div>
+
+    <div class="container" id="selectedTicketCommentContainer">
+      <div class="d-flex justify-content-start">
+        <h4>Comments</h4>
+      </div>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Enter comment" aria-label="commentInput" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="submit">Comment</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
