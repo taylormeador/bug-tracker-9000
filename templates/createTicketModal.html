@@ -52,7 +52,7 @@
 
         <div class="mb-3">
           <label for="projectSelectInput" class="form-label">Select Project</label>
-            <select class="form-select" id="projectSelectInput" multiple aria-label="multiple select example">
+            <select class="form-select" id="projectSelectInput" aria-label="multiple select example">
               {% for project in projects %}
                 <option value="{{ project }}">{{ project }}</option>
               {% endfor %}

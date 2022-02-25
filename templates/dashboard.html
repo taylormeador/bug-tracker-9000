@@ -3,9 +3,17 @@
 {% block content %}
 
 <div class="container" id="projectsContainer">
-    <h5>Projects</h5>
-    {% include 'createProjectModal.html' %}
-          <table class="table table-striped">
+      <div class="row">
+        <div class="col">
+          <h5>Projects</h5>
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+          {% include 'createProjectModal.html' %}
+        </div>
+      </div>
+            <table class="table table-striped">
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">Project</th>
