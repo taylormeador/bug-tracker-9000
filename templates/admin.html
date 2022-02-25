@@ -2,38 +2,6 @@
 
 {% block content %}
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newProjectModal">Create Project</button>
-
-<!-- Modal -->
-<div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="newProjectModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="newProjectModalLabel">Create Project</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label for="projectNameInput" class="form-label">Project Name</label>
-          <input type="email" class="form-control" id="projectNameInput" placeholder="New Project">
-        </div>
-        <div class="mb-3">
-          <label for="projectDescriptionInput" class="form-label">Project Description</label>
-          <textarea class="form-control" id="projectDescriptionInput" rows="3"></textarea>
-        </div>
-          <select class="form-select" multiple aria-label="multiple select example">
-              {% for user in users %}
-                <option value="{{ user }}">{{ user }}</option>
-              {% endfor %}
-          </select>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Create Project</button>
-      </div>
-    </div>
-  </div>
-</div>
+{% extends 'createProjectModal.html' %}
 
 {% endblock %}
