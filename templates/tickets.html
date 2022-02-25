@@ -2,6 +2,38 @@
 
 {% block content %}
 
-{% include 'createTicketModal.html' %}
+<div class="container shadow p-3 mb-5 bg-body rounded" id="projectsContainer">
+    <div class="container" id="containerHeader">
+      <div class="d-flex justify-content-end">
+        {% include 'createTicketModal.html' %}
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Ticket Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Author</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Ticket 1</th>
+          <td>Test ticket</td>
+          <td>Taylor</td>
+        </tr>
+        <tr>
+          <th scope="row">Ticket 2</th>
+          <td>Test ticket 2</td>
+          <td>Harry</td>
+        </tr>
+        <tr>
+          <th scope="row">Ticket 3</th>
+          <td>Test ticket 3</td>
+          <td>Otto</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
 
 {% endblock %}
