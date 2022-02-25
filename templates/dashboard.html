@@ -3,44 +3,43 @@
 {% block content %}
 
 <div class="container shadow p-3 mb-5 bg-body rounded" id="projectsContainer">
-      <div class="p-3 mb-2 bg-light text-dark">
-        <div class="d-flex justify-content-start">
-            <h5>Projects</h5>
-        </div>
-        <div class="d-flex justify-content-end">
-          {% include 'createProjectModal.html' %}
-        </div>
-    </div>
+    <div class="container" id="containerHeader">
+      <div class="d-flex justify-content-start">
+          <h5>Projects</h5>
       </div>
-            <table class="table table-striped">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">Project</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Contributors</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Sample Project</th>
-                  <td>Test project</td>
-                  <td>Otto<br>Taylor</td>
-                </tr>
-                <tr>
-                  <th scope="row">Sample Project 2</th>
-                  <td>Test project 2</td>
-                  <td>Otto<br>Taylor</td>
-                </tr>
-                <tr>
-                  <th scope="row">Sample Project 3</th>
-                  <td>Test project 3</td>
-                  <td>Otto<br>Taylor</td>
-                </tr>
-              </tbody>
-        </table>
+      <div class="d-flex justify-content-end">
+        {% include 'createProjectModal.html' %}
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Project</th>
+          <th scope="col">Description</th>
+          <th scope="col">Contributors</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Sample Project</th>
+          <td>Test project</td>
+          <td>Otto<br>Taylor</td>
+        </tr>
+        <tr>
+          <th scope="row">Sample Project 2</th>
+          <td>Test project 2</td>
+          <td>Otto<br>Taylor</td>
+        </tr>
+        <tr>
+          <th scope="row">Sample Project 3</th>
+          <td>Test project 3</td>
+          <td>Otto<br>Taylor</td>
+        </tr>
+      </tbody>
+    </table>
 </div>
 
-<div class="container" id="graphsContainer">
+<div class="container shadow p-3 mb-5 bg-body rounded" id="graphsContainer">
   <div class="row">
     <div class="col">
       tickets by type
