@@ -1,0 +1,71 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newTicketModal">Create Ticket</button>
+
+<!-- Modal -->
+<div class="modal fade" id="newTicketModal" tabindex="-1" aria-labelledby="newTicketModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newTicketModalLabel">Create Ticket</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="ticketTitleInput" class="form-label">Ticket Title</label>
+          <input class="form-control" id="ticketTitleInput" placeholder="New Ticket">
+        </div>
+        <div class="mb-3">
+          <label for="ticketDescriptionInput" class="form-label">Ticket Description</label>
+          <textarea class="form-control" id="ticketDescriptionInput" rows="3"></textarea>
+        </div>
+          <div class="mb-3">
+              <label for="ticketTimeInput" class="form-label">Time Estimate</label>
+              <input class="form-control" id="ticketTimeInput" placeholder="1 hour">
+            </div>
+            <select class="form-select" aria-label="selectTicketType">
+              <option value="Bug">Bug</option>
+              <option value="Issue">Issue</option>
+              <option value="Feature Request">Feature Request</option>
+            </select>
+
+            <select class="form-select" aria-label="selectTicketStatus">
+              <option value="New">New</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+
+            <select class="form-select" aria-label="selectTicketPriority">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+                <option value="Immediate">Immediate</option>
+            </select>
+
+            <select class="form-select" aria-label="selectTicketPriority">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+                <option value="Immediate">Immediate</option>
+            </select>
+
+            <select class="form-select" multiple aria-label="multiple select example">
+              {% for project in projects %}
+                <option value="{{ project }}">{{ project }}</option>
+              {% endfor %}
+            </select>
+
+            <select class="form-select" multiple aria-label="multiple select example">
+              {% for user in users %}
+                <option value="{{ user }}">{{ user }}</option>
+              {% endfor %}
+            </select>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Create Ticket</button>
+      </div>
+    </div>
+  </div>
+</div>
