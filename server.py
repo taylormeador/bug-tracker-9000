@@ -102,5 +102,10 @@ def admin():
 
 @app.route('/createproject', methods=['POST'])
 def createproject():
+    if request.method == 'POST':
+        project_name = request.form.get('projectName')
+        project_description = request.form.get('projectDescription')
+        return '''
+                      <h1>The name value is: {}</h1>
+                      <h1>The description value is: {}</h1>'''.format(project_name, project_description)
     #project_data = request.form['createProjectForm']
-    return request.form['projectName']
