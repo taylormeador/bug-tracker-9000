@@ -16,6 +16,7 @@ import redis
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
+DATABASE_URL = os.getenv('JAWSDB_URL')
 
 # Configure Redis for storing the session data on the server-side
 redis_url = os.getenv('REDISTOGO_URL')
@@ -25,8 +26,8 @@ app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_USE_SIGNER'] = True
 app.config['SESSION_REDIS'] = redis
 
+#OAuth
 oauth = OAuth(app)
-
 auth0 = oauth.register(
     'auth0',
     client_id='jPZYhRfytp9AO0gav3OdHpY4mPxHQPUG',
@@ -102,3 +103,10 @@ def tickets():
 def admin():
     user_list = ["Dev 1", "Dev 2", "Project Manager 1"]
     return render_template('admin.html', users=user_list)
+
+@app.route('/createproject', methods=['POST'])
+def createproject():
+    project_name = request.form.get('projectName')
+    project_description = request.form.get('projectDescription')
+    project_personnel = request.form.get('projectPresonnel')
+    return project_name, project_description, project_personnel
