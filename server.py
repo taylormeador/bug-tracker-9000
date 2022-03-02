@@ -13,7 +13,7 @@ from flask import url_for
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 import redis
-import requests
+from requests import request
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
@@ -110,5 +110,5 @@ def admin():
 def createproject():
     project_name = request.form.get('projectName')
     project_description = request.form.get('projectDescription')
-    project_personnel = request.form.get('projectPresonnel')
+    project_personnel = request.form.get('projectPersonnel')
     return project_name, project_description, project_personnel
