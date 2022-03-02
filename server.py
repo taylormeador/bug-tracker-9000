@@ -100,7 +100,7 @@ def admin():
     return render_template('admin.html', users=user_list)
 
 
-@app.route('/createproject', methods=['POST'])
+@app.route('/createproject/', methods=['POST'])
 def createproject():
     if request.method == 'POST':
         print(request.form)
