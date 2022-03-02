@@ -13,14 +13,14 @@
         <div class="modal-body">
           <div class="mb-3">
             <label for="projectNameInput" class="form-label">Project Name</label>
-            <input type="text" class="form-control" id="projectNameInput" placeholder="New Project">
+            <input type="text" class="form-control" id="projectNameInput" name="projectName" placeholder="New Project">
           </div>
           <div class="mb-3">
             <label for="projectDescriptionInput" class="form-label">Project Description</label>
-            <textarea class="form-control" id="projectDescriptionInput" rows="3"></textarea>
+            <textarea class="form-control" id="projectDescriptionInput" name="projectDescription" rows="3"></textarea>
           </div>
             <label for="selectUsersInput" class="form-label">Assign Personnel</label>
-            <select class="form-select" id="selectUsersInput" multiple aria-label="multiple select example">
+            <select class="form-select" id="selectUsersInput" name="selectUsers" multiple aria-label="multiple select example">
                 {% for user in users %}
                   <option value="{{ user }}">{{ user }}</option>
                 {% endfor %}
