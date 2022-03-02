@@ -4,16 +4,10 @@ from functools import wraps
 import json
 import os
 from werkzeug.exceptions import HTTPException
-from flask import Flask
-from flask import jsonify
-from flask import redirect
-from flask import render_template
-from flask import session
-from flask import url_for
+from flask import Flask, jsonify, redirect, render_template, session, url_for, request
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 import redis
-from requests import request
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
