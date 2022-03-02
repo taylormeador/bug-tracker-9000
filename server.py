@@ -105,4 +105,4 @@ def createproject():
     project_name = request.form.get('projectName')
     project_description = request.form.get('projectDescription')
     project_personnel = request.form.get('projectPersonnel')
-    return project_name, project_description, project_personnel
+    return jsonify(project_name)
