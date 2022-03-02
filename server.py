@@ -103,6 +103,7 @@ def admin():
 @app.route('/createproject', methods=['POST'])
 def createproject():
     if request.method == 'POST':
+        print(request.form)
         project_name = request.form.get('projectName')
         project_description = request.form.get('projectDescription')
         return '''
