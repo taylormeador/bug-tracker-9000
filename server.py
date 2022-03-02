@@ -100,11 +100,11 @@ def admin():
     return render_template('admin.html', users=user_list)
 
 
-@app.route('/createproject', methods=['GET', 'POST'])
+@app.route('/createproject', methods=['POST'])
 def createproject():
-    if request.method == 'GET':
-        project_name = request.args.get('projectName')
-        project_description = request.args.get('projectDescription')
+    if request.method == 'POST':
+        project_name = request.form.get('projectName')
+        project_description = request.form.get('projectDescription')
         return '''
                       <h1>The name value is: {}</h1>
                       <h1>The description value is: {}</h1>'''.format(project_name, project_description)
