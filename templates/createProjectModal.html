@@ -10,7 +10,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
-          <form action="{{ url_for('createproject') }}" name="createProjectForm" id="createProjectForm" method="POST">
+          <form action="{{ url_for('createproject') }}" name="createProjectForm" id="createProjectForm" method="GET">
             <div class="mb-3">
               <label for="projectNameInput" class="form-label">Project Name</label>
               <input type="text" class="form-control" id="projectNameInput" name="projectName" placeholder="New Project">
