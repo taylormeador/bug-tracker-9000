@@ -13,6 +13,7 @@ from flask import url_for
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 import redis
+import requests
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
@@ -103,6 +104,7 @@ def tickets():
 def admin():
     user_list = ["Dev 1", "Dev 2", "Project Manager 1"]
     return render_template('admin.html', users=user_list)
+
 
 @app.route('/createproject', methods=['POST'])
 def createproject():
