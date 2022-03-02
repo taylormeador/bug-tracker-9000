@@ -102,7 +102,7 @@ def admin():
 
 @app.route('/createproject', methods=['POST'])
 def createproject():
-    project_name = request.form.get('projectName')
+    project_name = request.form.get('projectNameInput')
     project_description = request.form.get('projectDescription')
     project_personnel = request.form.get('projectPersonnel')
     return jsonify(project_name)
