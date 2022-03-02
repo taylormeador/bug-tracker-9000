@@ -9,29 +9,30 @@
         <h5 class="modal-title" id="newProjectModalLabel">Create Project</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="{{ url_for('createproject') }}" name="createProjectForm" method="POST">
         <div class="modal-body">
-          <div class="mb-3">
-            <label for="projectNameInput" class="form-label">Project Name</label>
-            <input type="text" class="form-control" id="projectNameInput" name="projectName" placeholder="New Project">
-          </div>
-          <div class="mb-3">
-            <label for="projectDescriptionInput" class="form-label">Project Description</label>
-            <textarea class="form-control" id="projectDescriptionInput" name="projectDescription" rows="3"></textarea>
-          </div>
-            <label for="selectUsersInput" class="form-label">Assign Personnel</label>
-            <select class="form-select" id="selectUsersInput" name="selectUsers" multiple aria-label="multiple select example">
-                {% for user in users %}
-                  <option value="{{ user }}">{{ user }}</option>
-                {% endfor %}
-            </select>
+          <form action="{{ url_for('createproject') }}" name="createProjectForm" method="POST">
+            <div class="mb-3">
+              <label for="projectNameInput" class="form-label">Project Name</label>
+              <input type="text" class="form-control" id="projectNameInput" name="projectName" placeholder="New Project">
+            </div>
+            <div class="mb-3">
+              <label for="projectDescriptionInput" class="form-label">Project Description</label>
+              <textarea class="form-control" id="projectDescriptionInput" name="projectDescription" rows="3"></textarea>
+            </div>
+              <label for="selectUsersInput" class="form-label">Assign Personnel</label>
+              <select class="form-select" id="selectUsersInput" name="selectUsers" multiple aria-label="multiple select example">
+                  {% for user in users %}
+                    <option value="{{ user }}">{{ user }}</option>
+                  {% endfor %}
+              </select>
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Create Project</button>
           </div>
         </tr>
-      </form>
+
     </div>
   </div>
 </div>
