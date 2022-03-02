@@ -102,5 +102,5 @@ def admin():
 
 @app.route('/createproject', methods=['POST'])
 def createproject():
-    project_data = request.form['createProjectForm']
+    #project_data = request.form['createProjectForm']
     return render_template('createproject.html')
