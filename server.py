@@ -39,6 +39,14 @@ auth0 = oauth.register(
 )
 
 
+class ProjectsModel(db.model):
+    id = db.Column(db.Integer, primary_key=True)
+    projectName = db.Column(db.String(80), nullable=False)
+    projectDescription = db.Column(db.String(500))
+    projectContributors = db.Column(db.String(500))
+    projectManager = db.Column(db.String(50))
+
+
 def requires_authentication(f):
     @wraps(f)
     def decorated(*args, **kwargs):
