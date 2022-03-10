@@ -113,7 +113,9 @@ def logout():
 @requires_authentication
 def dashboard():
     user_list = get_user_emails()
-    projects = {"title": "bug tracker", "description": "test description", "contributors": "Taylor@gmail.com"}
+    projects = [{"title": "bug tracker", "description": "test description", "contributors": "Taylor@gmail.com"},
+                {"title": "other project", "description": "test description", "contributors": "Taylor@gmail.com"},
+                {"title": "test tracker", "description": "test", "contributors": "Taylor@gmail.com"}]
     return render_template('dashboard.html',
                            userinfo=session['profile'],
                            userinfo_pretty=json.dumps(session['jwt_payload'], indent=4), users=user_list, projects=projects)
