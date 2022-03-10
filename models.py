@@ -1,7 +1,7 @@
 from server import db
 
 
-class ProjectsModel(db.Model):
+class Projects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     projectName = db.Column(db.String(80), nullable=False)
     projectDescription = db.Column(db.String(500))
@@ -9,6 +9,6 @@ class ProjectsModel(db.Model):
     projectManager = db.Column(db.String(50))
 
 
-class UsersModel(db.Model):
+class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), nullable=False)

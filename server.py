@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
 DATABASE_URL = os.getenv('JAWSDB_URL')
 db = SQLAlchemy(app)
-from models import ProjectsModel, UsersModel
+from models import Projects, Users
 
 # Configure Redis for storing the session data on the server-side
 redis_url = os.getenv('REDISTOGO_URL')
@@ -99,7 +99,7 @@ def tickets():
 @app.route('/admin')
 # @requires_authorization
 def admin():
-    user_list = UsersModel.query.all()
+    user_list = Users.query.all()
     return render_template('admin.html', users=user_list)
 
 
