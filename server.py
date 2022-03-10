@@ -99,7 +99,7 @@ def tickets():
 @app.route('/admin')
 # @requires_authorization
 def admin():
-    user_list = ["Dev 1", "Dev 2", "Project Manager 1"]
+    user_list = Users.query.all()
     return render_template('admin.html', users=user_list)
 
 
