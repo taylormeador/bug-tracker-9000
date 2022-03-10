@@ -96,7 +96,7 @@ def logout():
 @app.route('/dashboard')
 @requires_authentication
 def dashboard():
-    db.create_all()
+    #db.create_all()
     # get json of users from auth0 management api
     conn = http.client.HTTPSConnection("dev--3rx-kw1.us.auth0.com")
     headers = {'authorization': "Bearer " + MGMT_API_ACCESS_TOKEN}
