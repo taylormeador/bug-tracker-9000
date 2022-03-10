@@ -48,13 +48,6 @@ res = conn.getresponse()
 data = res.read()
 MGMT_API_ACCESS_TOKEN = data.decode("utf-8")
 
-# get json of users from auth0 management api
-headers = { 'authorization': "Bearer " + MGMT_API_ACCESS_TOKEN }
-conn.request("GET", "/dev--3rx-kw1.us.auth0.com/api/v2/users", headers=headers)
-res = conn.getresponse()
-data = res.read()
-print(data.decode("utf-8"))
-
 
 def requires_authentication(f):
     @wraps(f)
@@ -103,6 +96,13 @@ def logout():
 @requires_authentication
 def dashboard():
     db.create_all()
+    # get json of users from auth0 management api
+    headers = {'authorization': "Bearer " + MGMT_API_ACCESS_TOKEN}
+    conn.request("GET", "/dev--3rx-kw1.us.auth0.com/api/v2/users", headers=headers)
+    res = conn.getresponse()
+    data = res.read()
+    print(data.decode("utf-8"))
+
     user_list = []  # TODO
     return render_template('dashboard.html',
                            userinfo=session['profile'],
