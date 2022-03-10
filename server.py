@@ -5,13 +5,16 @@ import json
 import os
 from werkzeug.exceptions import HTTPException
 from flask import Flask, jsonify, redirect, render_template, session, url_for, request
+from flask_sqlalchemy import SQLAlchemy
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 import redis
+from models import ProjectsModel
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
 DATABASE_URL = os.getenv('JAWSDB_URL')
+db = SQLAlchemy(app)
 
 # Configure Redis for storing the session data on the server-side
 redis_url = os.getenv('REDISTOGO_URL')
@@ -82,9 +85,10 @@ def logout():
 @app.route('/dashboard')
 @requires_authentication
 def dashboard():
+    user_list = ["Dev 1", "Dev 2", "Project Manager 1"]
     return render_template('dashboard.html',
                            userinfo=session['profile'],
-                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4))
+                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4, users=user_list))
 
 
 @app.route('/tickets')
@@ -99,13 +103,14 @@ def admin():
     return render_template('admin.html', users=user_list)
 
 
-@app.route('/createproject', methods=['POST', 'GET'])
+@app.route('/createproject', methods=['GET'])
 def createproject():
     if request.method == 'GET':
         print(request.args)
         project_name = request.args.get('projectName')
         project_description = request.args.get('projectDescription')
+        users = request.args.get('selectUsers')
         return '''
                               <h1>The name value is: {}</h1>
-                              <h1>The description value is: {}</h1>'''.format(project_name, project_description)
+                              <h1>The description value is: {} {}</h1>'''.format(project_name, project_description, users)
 
