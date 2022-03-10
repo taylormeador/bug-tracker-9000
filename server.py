@@ -51,6 +51,21 @@ data = json.loads(data.decode("utf-8"))
 MGMT_API_ACCESS_TOKEN = data['access_token']
 
 
+def get_user_emails():
+    # get json of users from auth0 management api
+    conn = http.client.HTTPSConnection("dev--3rx-kw1.us.auth0.com")
+    headers = {'authorization': "Bearer " + MGMT_API_ACCESS_TOKEN}
+    conn.request("GET", "https://dev--3rx-kw1.us.auth0.com/api/v2/users", headers=headers)
+    res = conn.getresponse()
+    data = res.read()
+    json_data = json.loads(data.decode("utf-8"))
+    # return list of emails
+    user_list = []
+    for user in json_data:
+        user_list.append(user['email'])
+    return user_list
+
+
 def requires_authentication(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -97,19 +112,11 @@ def logout():
 @app.route('/dashboard')
 @requires_authentication
 def dashboard():
-    # get json of users from auth0 management api
-    conn = http.client.HTTPSConnection("dev--3rx-kw1.us.auth0.com")
-    headers = {'authorization': "Bearer " + MGMT_API_ACCESS_TOKEN}
-    conn.request("GET", "https://dev--3rx-kw1.us.auth0.com/api/v2/users", headers=headers)
-    res = conn.getresponse()
-    data = res.read()
-    json_data = json.loads(data.decode("utf-8"))
-    user_list = []
-    for user in json_data:
-        user_list.append(user['email'])
+    user_list = get_user_emails()
+    projects = {"title": "bug tracker", "description": "test description", "contributors": "Taylor@gmail.com"}
     return render_template('dashboard.html',
                            userinfo=session['profile'],
-                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4), users=user_list)
+                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4), users=user_list, projects=projects)
 
 
 @app.route('/tickets')
@@ -120,7 +127,7 @@ def tickets():
 @app.route('/admin')
 # @requires_authorization
 def admin():
-    user_list = []  # TODO
+    user_list = get_user_emails()
     return render_template('admin.html', users=user_list)
 
 
@@ -139,9 +146,5 @@ def createproject():
                                projectContributors=project_contributors, projectManager=project_manager)
         db.session.add(new_project)
         db.session.commit()
-        return '''
-                              <h1>The name value is: {}</h1>
-                              <h1>The description value is: {} {}</h1>
-                              <h1>The manager value is: {}</h1>'''.format(project_name, project_description,
-                                                                          project_contributors, project_manager)
+        return render_template('dashboard.html')
 

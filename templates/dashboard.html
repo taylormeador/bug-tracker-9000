@@ -17,21 +17,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">Sample Project</th>
-          <td>Test project</td>
-          <td>Otto<br>Taylor</td>
-        </tr>
-        <tr>
-          <th scope="row">Sample Project 2</th>
-          <td>Test project 2</td>
-          <td>Harry<br>Taylor</td>
-        </tr>
-        <tr>
-          <th scope="row">Sample Project 3</th>
-          <td>Test project 3</td>
-          <td>Otto<br>Tamitha</td>
-        </tr>
+        {% for project in projects %}
+          <tr>
+            <th scope="row">{{ project.title }}</th>
+            <td>{{ project.title }}</td>
+            <td>{{ project.contributors }}</td>
+          </tr>
+        {% endfor %}
       </tbody>
     </table>
 </div>
