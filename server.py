@@ -21,7 +21,7 @@ app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_USE_SIGNER'] = True
 app.config['SESSION_REDIS'] = redis
 
-#OAuth
+# OAuth
 oauth = OAuth(app)
 auth0 = oauth.register(
     'auth0',
@@ -43,7 +43,6 @@ def requires_authentication(f):
             # Redirect to Login page here
             return redirect('/login')
         return f(*args, **kwargs)
-
     return decorated
 
 
@@ -100,7 +99,7 @@ def admin():
     return render_template('admin.html', users=user_list)
 
 
-@app.route('/createproject/', methods=['POST'])
+@app.route('/createproject', methods=['POST', 'GET'])
 def createproject():
     if request.method == 'POST':
         print(request.form)
@@ -109,4 +108,9 @@ def createproject():
         return '''
                       <h1>The name value is: {}</h1>
                       <h1>The description value is: {}</h1>'''.format(project_name, project_description)
-    #project_data = request.form['createProjectForm']
+    if request.method == 'GET':
+        print(request.args)
+        return '''
+                              <h1>The name value is: {}</h1>
+                              <h1>The description value is: {}</h1>'''
+
