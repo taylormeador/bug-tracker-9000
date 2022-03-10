@@ -71,7 +71,7 @@ def get_user_projects(user):
     projects = []
     for project in user_projects_result:
         print(type(project))
-        projects.append({'title': project.projectTitle, 'description': project.projectDescription, 'contributors': project.projectContributors})
+        projects.append({'title': project.projectName, 'description': project.projectDescription, 'contributors': project.projectContributors})
     return projects
 
 
