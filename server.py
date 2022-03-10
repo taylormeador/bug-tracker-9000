@@ -132,10 +132,14 @@ def createproject():
     if request.method == 'GET':
         project_name = request.args.get('projectName')
         project_description = request.args.get('projectDescription')
-        users = request.args.getlist('selectUsers')
-        project_manager = session['profile']
+        project_contributors = request.args.getlist('selectUsers')
+        project_manager = session['profile']['name']
+        # add the new project to the db
+        new_project = Projects(projectName=project_name, projectDescription=project_description, projectContributors=project_contributors, projectManager=project_manager)
+        db.session.add(new_project)
+        db.session.commit()
         return '''
                               <h1>The name value is: {}</h1>
                               <h1>The description value is: {} {}</h1>
-                              <h1>The manager value is: {}</h1>'''.format(project_name, project_description, users, project_manager)
+                              <h1>The manager value is: {}</h1>'''.format(project_name, project_description, project_contributors, project_manager)
 
