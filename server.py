@@ -39,13 +39,20 @@ auth0 = oauth.register(
     },
 )
 
+# request auth0 management access token
 conn = http.client.HTTPSConnection("dev--3rx-kw1.us.auth0.com")
 payload = "{\"client_id\":\"" + os.getenv('AUTH0_MANAGEMENT_API_CLIENT_ID') + "\",\"client_secret\":\"" + os.getenv('AUTH0_MANAGEMENT_API_CLIENT_SECRET') + "\",\"audience\":\"https://dev--3rx-kw1.us.auth0.com/api/v2/\",\"grant_type\":\"client_credentials\"}"
 headers = { 'content-type': "application/json" }
 conn.request("POST", "/oauth/token", payload, headers)
 res = conn.getresponse()
 data = res.read()
-print('auth token')
+MGMT_API_ACCESS_TOKEN = data.decode("utf-8")
+
+# get json of users from auth0 management api
+headers = { 'authorization': "Bearer " + MGMT_API_ACCESS_TOKEN }
+conn.request("GET", "/dev--3rx-kw1.us.auth0.com/api/v2/users", headers=headers)
+res = conn.getresponse()
+data = res.read()
 print(data.decode("utf-8"))
 
 
@@ -96,9 +103,7 @@ def logout():
 @requires_authentication
 def dashboard():
     db.create_all()
-    user_list = Users.query.all()
-    print(user_list)
-    print(type(user_list))
+    user_list = []  # TODO
     return render_template('dashboard.html',
                            userinfo=session['profile'],
                            userinfo_pretty=json.dumps(session['jwt_payload'], indent=4), users=user_list)
@@ -112,7 +117,7 @@ def tickets():
 @app.route('/admin')
 # @requires_authorization
 def admin():
-    user_list = Users.query.all()
+    user_list = []  # TODO
     return render_template('admin.html', users=user_list)
 
 
