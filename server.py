@@ -68,10 +68,11 @@ def get_user_emails():
 
 def get_user_projects(user):
     user_projects_result = Projects.query.filter(Projects.projectContributors.contains(user)).all()
-    print(user_projects_result)
-    return [{"title": "bug tracker", "description": "test description", "contributors": "Taylor@gmail.com"},
-                {"title": "other project", "description": "test description", "contributors": "Taylor@gmail.com"},
-                {"title": "test tracker", "description": "test", "contributors": "Taylor@gmail.com"}]
+    projects = []
+    for project in user_projects_result:
+        print(type(project))
+        projects.append({'title': project['title'], 'description': project['description'], 'contributors': project['contributors']})
+    return projects
 
 
 def requires_authentication(f):
