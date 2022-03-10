@@ -14,6 +14,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
 DATABASE_URL = os.getenv('JAWSDB_URL')
 db = SQLAlchemy(app)
+from models import ProjectsModel, UsersModel
 
 # Configure Redis for storing the session data on the server-side
 redis_url = os.getenv('REDISTOGO_URL')
@@ -36,14 +37,6 @@ auth0 = oauth.register(
         'scope': 'openid profile email',
     },
 )
-
-
-class ProjectsModel(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    projectName = db.Column(db.String(80), nullable=False)
-    projectDescription = db.Column(db.String(500))
-    projectContributors = db.Column(db.String(500))
-    projectManager = db.Column(db.String(50))
 
 
 def requires_authentication(f):
@@ -113,10 +106,9 @@ def admin():
 @app.route('/createproject', methods=['GET'])
 def createproject():
     if request.method == 'GET':
-        print(request.args)
         project_name = request.args.get('projectName')
         project_description = request.args.get('projectDescription')
-        users = request.args.get('selectUsers')
+        users = request.args.getlist('selectUsers')
         return '''
                               <h1>The name value is: {}</h1>
                               <h1>The description value is: {} {}</h1>'''.format(project_name, project_description, users)
