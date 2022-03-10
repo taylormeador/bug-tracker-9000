@@ -14,6 +14,7 @@ import http.client
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
 DATABASE_URL = os.getenv('JAWSDB_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 db = SQLAlchemy(app)
 from models import Projects, Users
 
@@ -97,6 +98,7 @@ def logout():
 def dashboard():
     db.create_all()
     # get json of users from auth0 management api
+    conn = http.client.HTTPSConnection("dev--3rx-kw1.us.auth0.com")
     headers = {'authorization': "Bearer " + MGMT_API_ACCESS_TOKEN}
     conn.request("GET", "/dev--3rx-kw1.us.auth0.com/api/v2/users", headers=headers)
     res = conn.getresponse()
