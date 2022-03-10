@@ -87,6 +87,8 @@ def logout():
 def dashboard():
     db.create_all()
     user_list = Users.query.all()
+    print(user_list)
+    print(type(user_list))
     return render_template('dashboard.html',
                            userinfo=session['profile'],
                            userinfo_pretty=json.dumps(session['jwt_payload'], indent=4), users=user_list)
