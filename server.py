@@ -66,6 +66,14 @@ def get_user_emails():
     return user_list
 
 
+def get_user_projects(user):
+    user_projects_result = Projects.query.filter(Projects.projectContributors.contains(user)).all()
+    print(user_projects_result)
+    return [{"title": "bug tracker", "description": "test description", "contributors": "Taylor@gmail.com"},
+                {"title": "other project", "description": "test description", "contributors": "Taylor@gmail.com"},
+                {"title": "test tracker", "description": "test", "contributors": "Taylor@gmail.com"}]
+
+
 def requires_authentication(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -113,9 +121,8 @@ def logout():
 @requires_authentication
 def dashboard():
     user_list = get_user_emails()
-    projects = [{"title": "bug tracker", "description": "test description", "contributors": "Taylor@gmail.com"},
-                {"title": "other project", "description": "test description", "contributors": "Taylor@gmail.com"},
-                {"title": "test tracker", "description": "test", "contributors": "Taylor@gmail.com"}]
+    user_email = 'taylor.r.meador@gmail.com'
+    projects = get_user_projects(user_email)
     return render_template('dashboard.html',
                            userinfo=session['profile'],
                            userinfo_pretty=json.dumps(session['jwt_payload'], indent=4),
