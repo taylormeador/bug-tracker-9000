@@ -85,7 +85,8 @@ def logout():
 @app.route('/dashboard')
 @requires_authentication
 def dashboard():
-    user_list = ["Dev 1", "Dev 2", "Project Manager 1"]
+    db.create_all()
+    user_list = Users.query.all()
     return render_template('dashboard.html',
                            userinfo=session['profile'],
                            userinfo_pretty=json.dumps(session['jwt_payload'], indent=4), users=user_list)
