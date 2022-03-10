@@ -118,7 +118,8 @@ def dashboard():
                 {"title": "test tracker", "description": "test", "contributors": "Taylor@gmail.com"}]
     return render_template('dashboard.html',
                            userinfo=session['profile'],
-                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4), users=user_list, projects=projects)
+                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4),
+                           users=user_list, projects=projects)
 
 
 @app.route('/tickets')

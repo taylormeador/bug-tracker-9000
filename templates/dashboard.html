@@ -19,9 +19,9 @@
       <tbody>
         {% for project in projects %}
           <tr>
-            <th scope="row">{{ project[title] }}</th>
-            <td>{{ project[description] }}</td>
-            <td>{{ project[contributors] }}</td>
+            <th scope="row">{{ project['title'] }}</th>
+            <td>{{ project['description'] }}</td>
+            <td>{{ project['contributors'] }}</td>
           </tr>
         {% endfor %}
       </tbody>
