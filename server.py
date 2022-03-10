@@ -9,7 +9,6 @@ from flask_sqlalchemy import SQLAlchemy
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 import redis
-from models import ProjectsModel
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
