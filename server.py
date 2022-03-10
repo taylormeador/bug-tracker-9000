@@ -95,7 +95,7 @@ def dashboard():
     user_list = ["Dev 1", "Dev 2", "Project Manager 1"]
     return render_template('dashboard.html',
                            userinfo=session['profile'],
-                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4, users=user_list))
+                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4), users=user_list)
 
 
 @app.route('/tickets')
