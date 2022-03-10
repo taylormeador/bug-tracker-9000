@@ -107,9 +107,6 @@ def dashboard():
     user_list = []
     for user in json_data:
         user_list.append(user['email'])
-
-
-
     return render_template('dashboard.html',
                            userinfo=session['profile'],
                            userinfo_pretty=json.dumps(session['jwt_payload'], indent=4), users=user_list)
@@ -132,14 +129,19 @@ def createproject():
     if request.method == 'GET':
         project_name = request.args.get('projectName')
         project_description = request.args.get('projectDescription')
-        project_contributors = request.args.getlist('selectUsers')
+        project_contributors_list = request.args.getlist('selectUsers')
+        project_contributors = ""
+        for contributor in project_contributors_list:
+            project_contributors += contributor + " "
         project_manager = session['profile']['name']
         # add the new project to the db
-        new_project = Projects(projectName=project_name, projectDescription=project_description, projectContributors=project_contributors, projectManager=project_manager)
+        new_project = Projects(projectName=project_name, projectDescription=project_description,
+                               projectContributors=project_contributors, projectManager=project_manager)
         db.session.add(new_project)
         db.session.commit()
         return '''
                               <h1>The name value is: {}</h1>
                               <h1>The description value is: {} {}</h1>
-                              <h1>The manager value is: {}</h1>'''.format(project_name, project_description, project_contributors, project_manager)
+                              <h1>The manager value is: {}</h1>'''.format(project_name, project_description,
+                                                                          project_contributors, project_manager)
 
