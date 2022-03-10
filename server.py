@@ -14,7 +14,7 @@ import http.client
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
 DATABASE_URL = os.getenv('JAWSDB_URL')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 db = SQLAlchemy(app)
 from models import Projects, Users
 
@@ -108,6 +108,8 @@ def dashboard():
     for user in json_data:
         user_list.append(user['email'])
 
+
+
     return render_template('dashboard.html',
                            userinfo=session['profile'],
                            userinfo_pretty=json.dumps(session['jwt_payload'], indent=4), users=user_list)
@@ -131,7 +133,9 @@ def createproject():
         project_name = request.args.get('projectName')
         project_description = request.args.get('projectDescription')
         users = request.args.getlist('selectUsers')
+        project_manager = session['profile']
         return '''
                               <h1>The name value is: {}</h1>
-                              <h1>The description value is: {} {}</h1>'''.format(project_name, project_description, users)
+                              <h1>The description value is: {} {}</h1>
+                              <h1>The manager value is: {}</h1>'''.format(project_name, project_description, users, project_manager)
 
