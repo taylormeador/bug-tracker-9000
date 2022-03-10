@@ -9,6 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 import redis
+import http.client
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
@@ -37,6 +38,15 @@ auth0 = oauth.register(
         'scope': 'openid profile email',
     },
 )
+
+conn = http.client.HTTPSConnection("dev--3rx-kw1.us.auth0.com")
+payload = "{\"client_id\":\"" + os.getenv('AUTH0_MANAGEMENT_API_CLIENT_ID') + "\",\"client_secret\":\"" + os.getenv('AUTH0_MANAGEMENT_API_CLIENT_SECRET') + "\",\"audience\":\"https://dev--3rx-kw1.us.auth0.com/api/v2/\",\"grant_type\":\"client_credentials\"}"
+headers = { 'content-type': "application/json" }
+conn.request("POST", "/oauth/token", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print('auth token')
+print(data.decode("utf-8"))
 
 
 def requires_authentication(f):
