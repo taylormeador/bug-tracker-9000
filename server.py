@@ -47,7 +47,8 @@ headers = { 'content-type': "application/json" }
 conn.request("POST", "/oauth/token", payload, headers)
 res = conn.getresponse()
 data = res.read()
-MGMT_API_ACCESS_TOKEN = data.decode("utf-8")['access_token']
+data = json.loads(data.decode("utf-8"))
+MGMT_API_ACCESS_TOKEN = data['access_token']
 
 
 def requires_authentication(f):
