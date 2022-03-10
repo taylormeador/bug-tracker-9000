@@ -103,9 +103,12 @@ def dashboard():
     conn.request("GET", "https://dev--3rx-kw1.us.auth0.com/api/v2/users", headers=headers)
     res = conn.getresponse()
     data = res.read()
-    print(data.decode("utf-8"))
+    json_data = json.loads(data.decode("utf-8"))
+    user_list = []
+    for user in json_data:
+        user_list.append(user)
+        print(user)
 
-    user_list = []  # TODO
     return render_template('dashboard.html',
                            userinfo=session['profile'],
                            userinfo_pretty=json.dumps(session['jwt_payload'], indent=4), users=user_list)
