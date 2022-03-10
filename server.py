@@ -106,8 +106,7 @@ def dashboard():
     json_data = json.loads(data.decode("utf-8"))
     user_list = []
     for user in json_data:
-        user_list.append(user)
-        print(user)
+        user_list.append(user['email'])
 
     return render_template('dashboard.html',
                            userinfo=session['profile'],
