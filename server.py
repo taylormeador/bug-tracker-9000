@@ -219,3 +219,22 @@ def create_ticket():
 
         return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
     return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
+
+
+@app.route('/completeticket', methods=['GET'])
+@requires_authentication
+def complete_ticket():
+    user_list = get_user_emails()
+    user_email = session['profile']['name']
+    projects = get_user_projects(user_email)
+    tickets = get_user_tickets(user_email)
+
+    if request.method == 'GET':
+        ticket_name = request.args.get('ticket-title')
+        if ticket_name:
+            # mark the ticket as complete
+            ticket_row = Tickets.query.filter_by(name=ticket_name)
+            if ticket_row:
+                ticket_row.status = "Resolved"
+                tickets = get_user_tickets(user_email)
+    return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
