@@ -50,7 +50,9 @@ data = res.read()
 data = json.loads(data.decode("utf-8"))
 MGMT_API_ACCESS_TOKEN = data['access_token']
 
-
+"""
+Returns a list of emails that are registered with Auth0
+"""
 def get_user_emails():
     # get json of users from auth0 management api
     conn = http.client.HTTPSConnection("dev--3rx-kw1.us.auth0.com")
@@ -66,6 +68,9 @@ def get_user_emails():
     return user_list
 
 
+"""
+Takes an email address as an argument and returns a list of dictionaries conatining project info
+"""
 def get_user_projects(user):
     user_projects_result = Projects.query.filter(Projects.projectContributors.contains(user)).all()
     projects = []
@@ -121,7 +126,7 @@ def logout():
 @requires_authentication
 def dashboard():
     user_list = get_user_emails()
-    user_email = 'taylor.r.meador@gmail.com'
+    user_email = session['profile']['name']
     projects = get_user_projects(user_email)
     return render_template('dashboard.html',
                            userinfo=session['profile'],
@@ -130,11 +135,15 @@ def dashboard():
 
 
 @app.route('/tickets')
+@requires_authentication
 def tickets():
-    return render_template('tickets.html')
+    user_list = get_user_emails()
+    projects = get_user_projects()
+    return render_template('tickets.html', projects=projects, users=user_list)
 
 
 @app.route('/admin')
+@requires_authentication
 # @requires_authorization
 def admin():
     user_list = get_user_emails()
@@ -142,6 +151,7 @@ def admin():
 
 
 @app.route('/createproject', methods=['GET'])
+@requires_authentication
 def createproject():
     if request.method == 'GET':
         project_name = request.args.get('projectName')
