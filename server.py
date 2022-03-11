@@ -200,7 +200,7 @@ def create_ticket():
 
         # add ticket to db
         new_ticket = Tickets(name=ticket_name, description=ticket_description, estimatedTime=ticket_time, type=ticket_type,
-                             status=ticket_status, project=project_select, users=user_select)
+                             status=ticket_status, project=project_select, users=users)
         db.session.add(new_ticket)
         db.session.commit()
         return
