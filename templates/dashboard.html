@@ -7,10 +7,9 @@
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart() {
+  function drawTicketsByProjectChart() {
 
     var ticketsByProjectData = {{ tickets_by_project_data | safe }};
-    console.log(typeof ticketsByProjectData);
 
     var data = google.visualization.arrayToDataTable(ticketsByProjectData);
 
@@ -19,6 +18,36 @@
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('tickets-project-piechart'));
+
+    chart.draw(data, options);
+  }
+
+  function drawTicketsByPriorityChart() {
+
+    var ticketsByPriorityData = {{ tickets_by_priority_data | safe }};
+
+    var data = google.visualization.arrayToDataTable(ticketsByPriorityData);
+
+    var options = {
+      title: 'Tickets by Priority'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('tickets-priority-piechart'));
+
+    chart.draw(data, options);
+  }
+
+  function drawTicketsByStatusChart() {
+
+    var ticketsByStatusData = {{ tickets_by_status_data | safe }};
+
+    var data = google.visualization.arrayToDataTable(ticketsByStatusData);
+
+    var options = {
+      title: 'Tickets by Status'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('tickets-status-piechart'));
 
     chart.draw(data, options);
   }
@@ -56,10 +85,10 @@
       <div id="tickets-project-piechart" style="width: 450px; height: 250px;"></div>
     </div>
     <div class="col">
-      tickets by priority
+      <div id="tickets-priority-piechart" style="width: 450px; height: 250px;"></div>
     </div>
     <div class="col">
-      tickets by status
+      <div id="tickets-status-piechart" style="width: 450px; height: 250px;"></div>
     </div>
   </div>
 </div>

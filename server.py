@@ -92,7 +92,7 @@ def get_user_tickets(user):
     for ticket in user_tickets_result:
         tickets_list.append({'title': ticket.name, 'description': ticket.description, 'time': ticket.estimatedTime,
                              'status': ticket.status, 'type': ticket.type, 'project': ticket.project,
-                             'users': ticket.users, 'author': ticket.author})
+                             'users': ticket.users, 'author': ticket.author, 'priority': ticket.priority})
     return tickets_list
 
 
@@ -149,12 +149,26 @@ def dashboard():
 
     tickets_by_project_data = [['Project', '# of Tickets']]
     for project in projects:
-        project_tickets_count = Tickets.query.filter(Tickets.project == project['title'], Tickets.status != "Resolved").count()
+        project_tickets_count = Tickets.query.filter(Tickets.project == project['title'],
+                                                     Tickets.status != "Resolved").count()
         tickets_by_project_data.append([project['title'], project_tickets_count])
+
+    tickets_by_priority_data = [['Priority', '# of Tickets'],
+                                ['Immediate', Tickets.query.filter_by(priority='Immediate')],
+                                ['High', Tickets.query.filter_by(priority='High')],
+                                ['Medium', Tickets.query.filter_by(priority='Medium')],
+                                ['Low', Tickets.query.filter_by(priority='Low')]]
+
+    tickets_by_status_data = [['Status', '# of Tickets'],
+                              ['New', Tickets.query.filter_by(status='New')],
+                              ['In Progress', Tickets.query.filter_by(status='In Progress')],
+                              ['Resolved', Tickets.query.filter_by(status='Resolved')]]
 
     return render_template('dashboard.html',
                            userinfo=session['profile'], userinfo_pretty=json.dumps(session['jwt_payload'], indent=4),
-                           users=user_list, projects=projects, tickets_by_project_data=tickets_by_project_data)
+                           users=user_list, projects=projects, tickets_by_project_data=tickets_by_project_data,
+                           tickets_by_priority_data=tickets_by_priority_data,
+                           tickets_by_status_data=tickets_by_status_data)
 
 
 @app.route('/tickets')
@@ -163,8 +177,8 @@ def tickets():
     user_list = get_user_emails()
     user_email = session['profile']['name']
     projects = get_user_projects(user_email)
-    tickets = get_user_tickets(user_email)
-    return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
+    tickets_list = get_user_tickets(user_email)
+    return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets_list)
 
 
 @app.route('/admin')
@@ -204,6 +218,7 @@ def create_ticket():
         ticket_time = request.args.get('ticket-time')
         ticket_type = request.args.get('ticket-type')
         ticket_status = request.args.get('ticket-status')
+        ticket_priority = request.args.get('ticket-priority')
         project_select = request.args.get('project-select')
         user_select = request.args.getlist('user-select')
         ticket_author = session['profile']['name']
@@ -213,8 +228,8 @@ def create_ticket():
             users += user + " "
         # add ticket to db
         new_ticket = Tickets(name=ticket_name, description=ticket_description, estimatedTime=ticket_time,
-                             type=ticket_type,
-                             status=ticket_status, project=project_select, users=users, author=ticket_author)
+                             type=ticket_type, status=ticket_status, project=project_select, users=users,
+                             author=ticket_author, priority=ticket_priority)
         db.session.add(new_ticket)
         db.session.commit()
 
