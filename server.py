@@ -82,7 +82,6 @@ def get_user_projects(user):
     return projects
 
 
-
 def get_user_tickets(user):
     """
     Takes an email address as an argument and returns a list of dictionaries containing ticket info
@@ -214,5 +213,9 @@ def create_ticket():
                              status=ticket_status, project=project_select, users=users, author=ticket_author)
         db.session.add(new_ticket)
         db.session.commit()
+
+        # get the new ticket before reloading
+        tickets = get_user_tickets(user_email)
+
         return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
     return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
