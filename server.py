@@ -75,7 +75,8 @@ def get_user_projects(user):
     user_projects_result = Projects.query.filter(Projects.projectContributors.contains(user)).all()
     projects = []
     for project in user_projects_result:
-        projects.append({'title': project.projectName, 'description': project.projectDescription, 'contributors': project.projectContributors})
+        projects.append({'title': project.projectName, 'description': project.projectDescription,
+                         'contributors': project.projectContributors})
     return projects
 
 
@@ -83,7 +84,7 @@ def get_user_projects(user):
 Takes an email address as an argument and returns a list of dictionaries containing ticket info
 """
 def get_user_tickets(user):
-    user_tickets_result = Projects.query.filter(Tickets.users.contains(user)).all()
+    user_tickets_result = Tickets.query.filter(Tickets.users.contains(user)).all()
     tickets = []
     for ticket in user_tickets_result:
         tickets.append({'title': ticket.name, 'description': ticket.description, 'time': ticket.estimatedTime,
