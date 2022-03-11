@@ -233,6 +233,7 @@ def process_ticket():
         ticket_name = request.args.get('ticket-title')
         command = ticket_name[:3]  # commands: res=resolved, del=delete, wor=working
         if ticket_name:
+            print(ticket_name)
             if command == "res":  # user clicked "Checkmark" button
                 # mark the ticket as complete
                 ticket_row = Tickets.query.filter_by(name=ticket_name)
