@@ -88,7 +88,8 @@ def get_user_tickets(user):
     tickets = []
     for ticket in user_tickets_result:
         tickets.append({'title': ticket.name, 'description': ticket.description, 'time': ticket.estimatedTime,
-                        'status': ticket.status, 'type': ticket.type, 'project': ticket.project, 'users': ticket.users})
+                        'status': ticket.status, 'type': ticket.type, 'project': ticket.project, 'users': ticket.users,
+                        'author': ticket.author})
     return tickets
 
 
@@ -194,6 +195,7 @@ def create_ticket():
         ticket_status = request.args.get('ticket-status')
         project_select = request.args.get('project-select')
         user_select = request.args.getlist('user-select')
+        ticket_author = session['profile']['name']
         # we want all users emails seperated by a space
         users = ""
         for user in user_select:
@@ -201,7 +203,7 @@ def create_ticket():
 
         # add ticket to db
         new_ticket = Tickets(name=ticket_name, description=ticket_description, estimatedTime=ticket_time, type=ticket_type,
-                             status=ticket_status, project=project_select, users=users)
+                             status=ticket_status, project=project_select, users=users, author=ticket_author)
         db.session.add(new_ticket)
         db.session.commit()
         return render_template('tickets.html')

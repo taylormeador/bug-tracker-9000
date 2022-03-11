@@ -22,3 +22,4 @@ class Tickets(db.Model):
     type = db.Column(db.String(50))
     project = db.Column(db.String(100))
     users = db.Column(db.String(500))
+    author = db.Column(db.String(100))
