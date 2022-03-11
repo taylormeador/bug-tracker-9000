@@ -16,7 +16,7 @@ app.secret_key = os.getenv('FLASK_APP_SECRET')
 DATABASE_URL = os.getenv('JAWSDB_URL')
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 db = SQLAlchemy(app)
-from models import Projects, Users
+from models import Projects, Users, Tickets
 
 # Configure Redis for storing the session data on the server-side
 redis_url = os.getenv('REDISTOGO_URL')
@@ -73,6 +73,17 @@ Takes an email address as an argument and returns a list of dictionaries conatin
 """
 def get_user_projects(user):
     user_projects_result = Projects.query.filter(Projects.projectContributors.contains(user)).all()
+    projects = []
+    for project in user_projects_result:
+        projects.append({'title': project.projectName, 'description': project.projectDescription, 'contributors': project.projectContributors})
+    return projects
+
+
+"""
+Takes an email address as an argument and returns a list of dictionaries conatining ticket info
+"""
+def get_user_projects(user):
+    user_tickets_result = Projects.query.filter(Projects.projectContributors.contains(user)).all()
     projects = []
     for project in user_projects_result:
         projects.append({'title': project.projectName, 'description': project.projectDescription, 'contributors': project.projectContributors})
@@ -139,7 +150,8 @@ def tickets():
     user_list = get_user_emails()
     user_email = session['profile']['name']
     projects = get_user_projects(user_email)
-    return render_template('tickets.html', projects=projects, users=user_list)
+    tickets = get_user_tickets(user_email)
+    return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
 
 
 @app.route('/admin')
@@ -157,6 +169,7 @@ def create_project():
         project_name = request.args.get('projectName')
         project_description = request.args.get('projectDescription')
         project_contributors_list = request.args.getlist('selectUsers')
+        # we want all users emails seperated by a space
         project_contributors = ""
         for contributor in project_contributors_list:
             project_contributors += contributor + " "
@@ -178,8 +191,15 @@ def create_ticket():
         ticket_type = request.args.get('ticket-type')
         ticket_status = request.args.get('ticket-status')
         project_select = request.args.get('project-select')
-        user_select = request.args.get('user-select')
-        return """
-        <body>{} {} {} {} 
-        {} {} {}
-        """.format(ticket_name, ticket_description, ticket_time, ticket_type, ticket_status, project_select, user_select)
+        user_select = request.args.getlist('user-select')
+        # we want all users emails seperated by a space
+        users = ""
+        for user in user_select:
+            users += user + " "
+
+        # add ticket to db
+        new_ticket = Tickets(name=ticket_name, description=ticket_description, estimatedTime=ticket_time, type=ticket_type,
+                             status=ticket_status, project=project_select, users=user_select)
+        db.session.add(new_ticket)
+        db.session.commit()
+        return

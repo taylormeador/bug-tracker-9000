@@ -11,27 +11,21 @@
     <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Ticket Title</th>
+          <th scope="col">Ticket</th>
+          <th scope="col">Project</th>
           <th scope="col">Description</th>
           <th scope="col">Author</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">Ticket 1</th>
-          <td>Test ticket</td>
-          <td>Taylor</td>
-        </tr>
-        <tr>
-          <th scope="row">Ticket 2</th>
-          <td>Test ticket 2</td>
-          <td>Harry</td>
-        </tr>
-        <tr>
-          <th scope="row">Ticket 3</th>
-          <td>Test ticket 3</td>
-          <td>Otto</td>
-        </tr>
+        {% for ticket in tickets %}
+          <tr>
+            <th scope="row">{{ ticket['title'] }}</th>
+            <td>{{ ticket['project'] }}</td>
+            <td>{{ ticket['description'] }}</td>
+            <td>{{ ticket['author'] }}</td>
+          </tr>
+        {% endfor %}
       </tbody>
     </table>
 </div>

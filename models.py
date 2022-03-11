@@ -12,3 +12,13 @@ class Projects(db.Model):
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), nullable=False)
+
+class Tickets(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.String(500))
+    estimatedTime = db.Column(db.Integer)
+    status = db.Column(db.String(50))
+    type = db.Column(db.String(50))
+    project = db.Column(db.String(100))
+    users = db.Column(db.String(500))
