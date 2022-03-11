@@ -8,6 +8,8 @@
 
       var ticketsByProjectData = {{ tickets_by_project_data|safe }};
 
+      console.log(ticketsByProjectData)
+
       function drawChart(ticketsByProjectData) {
 
         var data = google.visualization.arrayToDataTable(ticketsByProjectData);

@@ -152,8 +152,6 @@ def dashboard():
         project_tickets_count = Tickets.query.filter(Tickets.project == project['title'], Tickets.status != "Resolved").count()
         tickets_by_project_data.append([project['title'], project_tickets_count])
 
-    print(tickets_by_project_data)
-
     return render_template('dashboard.html',
                            userinfo=session['profile'], userinfo_pretty=json.dumps(session['jwt_payload'], indent=4),
                            users=user_list, projects=projects, tickets_by_project_data=tickets_by_project_data)
