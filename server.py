@@ -235,7 +235,7 @@ def process_ticket():
                 ticket_row.status = "Resolved"
                 db.session.commit()
             if command == "del":  # user clicked "Trash" button
-                ticket_row.delete()
+                db.session.delete(ticket_row)
                 db.session.commit()
             if command == "wor":  # user clicked "Hammer" button
                 ticket_row.status = "In Progress"
