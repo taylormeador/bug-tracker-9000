@@ -230,8 +230,9 @@ def process_ticket():
     tickets = get_user_tickets(user_email)
 
     if request.method == 'GET':
-        ticket_name = request.args.get('ticket-title')
-        command = ticket_name[:3]  # commands: res=resolved, del=delete, wor=working
+        arg = request.args.get('ticket-title')
+        command = arg[:3]  # commands: res=resolved, del=delete, wor=working
+        ticket_name = arg[4:]
         if ticket_name:
             print(ticket_name)
             if command == "res":  # user clicked "Checkmark" button
@@ -245,11 +246,9 @@ def process_ticket():
                 Tickets.query.filter_by(name=ticket_name).delete()
             if command == "wor":  # user clicked "Hammer" button
                 ticket_row = Tickets.query.filter_by(name=ticket_name)
-                if ticket_row:
-                    print("ticket row true")
-                    ticket_row.status = "In Progress"
-                    db.session.commit()
-                    print("ticket row committed")
-                    tickets = get_user_tickets(user_email)
+                ticket_row.status = "In Progress"
+                db.session.commit()
+                print("ticket row committed")
+                tickets = get_user_tickets(user_email)
 
     return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
