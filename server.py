@@ -245,7 +245,7 @@ def process_ticket():
             if command == "del":  # user clicked "Trash" button
                 Tickets.query.filter_by(name=ticket_name).delete()
             if command == "wor":  # user clicked "Hammer" button
-                ticket_row = Tickets.query.filter_by(name=ticket_name)
+                ticket_row = Tickets.query.filter_by(name=ticket_name).first()
                 print(ticket_row, type(ticket_row))
                 print("og: ", ticket_row.status)
                 ticket_row.status = "In Progress"
