@@ -138,7 +138,8 @@ def dashboard():
 @requires_authentication
 def tickets():
     user_list = get_user_emails()
-    projects = get_user_projects()
+    user_email = session['profile']['name']
+    projects = get_user_projects(user_email)
     return render_template('tickets.html', projects=projects, users=user_list)
 
 
