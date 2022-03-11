@@ -246,9 +246,11 @@ def process_ticket():
                 Tickets.query.filter_by(name=ticket_name).delete()
             if command == "wor":  # user clicked "Hammer" button
                 ticket_row = Tickets.query.filter_by(name=ticket_name)
+                print(ticket_row, type(ticket_row))
+                print("og: ", ticket_row.status)
                 ticket_row.status = "In Progress"
+                print("new: ", ticket_row.status)
                 db.session.commit()
-                print("ticket row committed")
                 tickets = get_user_tickets(user_email)
 
     return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
