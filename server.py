@@ -241,12 +241,14 @@ def process_ticket():
                     db.session.commit()
                     tickets = get_user_tickets(user_email)
             if command == "del":  # user clicked "Trash" button
-                ticket_row = Tickets.query.filter_by(name=ticket_name).delete()
+                Tickets.query.filter_by(name=ticket_name).delete()
             if command == "wor":  # user clicked "Hammer" button
                 ticket_row = Tickets.query.filter_by(name=ticket_name)
                 if ticket_row:
+                    print("ticket row true")
                     ticket_row.status = "In Progress"
                     db.session.commit()
+                    print("ticket row committed")
                     tickets = get_user_tickets(user_email)
 
     return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
