@@ -203,4 +203,4 @@ def create_ticket():
                              status=ticket_status, project=project_select, users=users)
         db.session.add(new_ticket)
         db.session.commit()
-        return
+        return render_template('tickets.html')
