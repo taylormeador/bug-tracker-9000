@@ -42,8 +42,9 @@ auth0 = oauth.register(
 
 # request auth0 management access token
 conn = http.client.HTTPSConnection("dev--3rx-kw1.us.auth0.com")
-payload = "{\"client_id\":\"" + os.getenv('AUTH0_MANAGEMENT_API_CLIENT_ID') + "\",\"client_secret\":\"" + os.getenv('AUTH0_MANAGEMENT_API_CLIENT_SECRET') + "\",\"audience\":\"https://dev--3rx-kw1.us.auth0.com/api/v2/\",\"grant_type\":\"client_credentials\"}"
-headers = { 'content-type': "application/json" }
+payload = "{\"client_id\":\"" + os.getenv('AUTH0_MANAGEMENT_API_CLIENT_ID') + "\",\"client_secret\":\"" + os.getenv(
+    'AUTH0_MANAGEMENT_API_CLIENT_SECRET') + "\",\"audience\":\"https://dev--3rx-kw1.us.auth0.com/api/v2/\",\"grant_type\":\"client_credentials\"}"
+headers = {'content-type': "application/json"}
 conn.request("POST", "/oauth/token", payload, headers)
 res = conn.getresponse()
 data = res.read()
@@ -69,7 +70,6 @@ def get_user_emails():
     return user_list
 
 
-
 def get_user_projects(user):
     """
     Takes an email address as an argument and returns a list of dictionaries conatining project info
@@ -86,13 +86,14 @@ def get_user_tickets(user):
     """
     Takes an email address as an argument and returns a list of dictionaries containing ticket info
     """
-    user_tickets_result = Tickets.query.filter(Tickets.users.contains(user)).all()
-    tickets = []
+    # get the tickets that have our users email and are not already resolved
+    user_tickets_result = Tickets.query.filter(Tickets.users.contains(user), Tickets.status != "Resolved").all()
+    tickets_list = []
     for ticket in user_tickets_result:
-        tickets.append({'title': ticket.name, 'description': ticket.description, 'time': ticket.estimatedTime,
-                        'status': ticket.status, 'type': ticket.type, 'project': ticket.project, 'users': ticket.users,
-                        'author': ticket.author})
-    return tickets
+        tickets_list.append({'title': ticket.name, 'description': ticket.description, 'time': ticket.estimatedTime,
+                             'status': ticket.status, 'type': ticket.type, 'project': ticket.project,
+                             'users': ticket.users, 'author': ticket.author})
+    return tickets_list
 
 
 def requires_authentication(f):
@@ -102,6 +103,7 @@ def requires_authentication(f):
             # Redirect to Login page here
             return redirect('/login')
         return f(*args, **kwargs)
+
     return decorated
 
 
@@ -190,10 +192,6 @@ def create_project():
 @app.route('/createticket', methods=['GET'])
 @requires_authentication
 def create_ticket():
-    user_list = get_user_emails()
-    user_email = session['profile']['name']
-    projects = get_user_projects(user_email)
-    tickets = get_user_tickets(user_email)
     if request.method == 'GET':
         ticket_name = request.args.get('ticket-title')
         ticket_description = request.args.get('ticket-description')
@@ -207,50 +205,46 @@ def create_ticket():
         users = ""
         for user in user_select:
             users += user + " "
-
         # add ticket to db
-        new_ticket = Tickets(name=ticket_name, description=ticket_description, estimatedTime=ticket_time, type=ticket_type,
+        new_ticket = Tickets(name=ticket_name, description=ticket_description, estimatedTime=ticket_time,
+                             type=ticket_type,
                              status=ticket_status, project=project_select, users=users, author=ticket_author)
         db.session.add(new_ticket)
         db.session.commit()
 
-        # get the new ticket before reloading
-        tickets = get_user_tickets(user_email)
+    # get new data for page re render
+    user_list = get_user_emails()
+    user_email = session['profile']['name']
+    projects = get_user_projects(user_email)
+    updated_tickets = get_user_tickets(user_email)
 
-        return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
-    return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
+    return render_template('tickets.html', projects=projects, users=user_list, tickets=updated_tickets)
 
 
 @app.route('/processticket', methods=['GET'])
 @requires_authentication
 def process_ticket():
-    user_list = get_user_emails()
-    user_email = session['profile']['name']
-    projects = get_user_projects(user_email)
-    tickets = get_user_tickets(user_email)
-
+    # process request
     if request.method == 'GET':
         arg = request.args.get('ticket-title')
         command = arg[:3]  # commands: res=resolved, del=delete, wor=working
         ticket_name = arg[4:]
         if ticket_name:
-            print(ticket_name)
+            ticket_row = Tickets.query.filter_by(name=ticket_name).first()
             if command == "res":  # user clicked "Checkmark" button
-                # mark the ticket as complete
-                ticket_row = Tickets.query.filter_by(name=ticket_name)
-                if ticket_row:
-                    ticket_row.status = "Resolved"
-                    db.session.commit()
-                    tickets = get_user_tickets(user_email)
-            if command == "del":  # user clicked "Trash" button
-                Tickets.query.filter_by(name=ticket_name).delete()
-            if command == "wor":  # user clicked "Hammer" button
-                ticket_row = Tickets.query.filter_by(name=ticket_name).first()
-                print(ticket_row, type(ticket_row))
-                print("og: ", ticket_row.status)
-                ticket_row.status = "In Progress"
-                print("new: ", ticket_row.status)
+                ticket_row.status = "Resolved"
                 db.session.commit()
-                tickets = get_user_tickets(user_email)
+            if command == "del":  # user clicked "Trash" button
+                ticket_row.delete()
+                db.session.commit()
+            if command == "wor":  # user clicked "Hammer" button
+                ticket_row.status = "In Progress"
+                db.session.commit()
 
-    return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
+    # get new data for page re render
+    user_list = get_user_emails()
+    user_email = session['profile']['name']
+    projects = get_user_projects(user_email)
+    updated_tickets = get_user_tickets(user_email)
+
+    return render_template('tickets.html', projects=projects, users=user_list, tickets=updated_tickets)
