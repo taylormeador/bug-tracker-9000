@@ -5,51 +5,56 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
+  google.charts.setOnLoadCallback(drawCharts);
 
-  function drawTicketsByProjectChart() {
+  function drawCharts() {
+
+    // project chart
 
     var ticketsByProjectData = {{ tickets_by_project_data | safe }};
 
-    var data = google.visualization.arrayToDataTable(ticketsByProjectData);
+    var projectData = google.visualization.arrayToDataTable(ticketsByProjectData);
 
-    var options = {
+    var projectOptions = {
       title: 'Tickets by Project'
     };
 
-    var chart = new google.visualization.PieChart(document.getElementById('tickets-project-piechart'));
+    var projectChart = new google.visualization.PieChart(document.getElementById('tickets-project-piechart'));
 
-    chart.draw(data, options);
-  }
+    projectChart.draw(projectData, projectOptions);
 
-  function drawTicketsByPriorityChart() {
+
+
+
+    // priority chart
 
     var ticketsByPriorityData = {{ tickets_by_priority_data | safe }};
 
-    var data = google.visualization.arrayToDataTable(ticketsByPriorityData);
+    var priorityData = google.visualization.arrayToDataTable(ticketsByPriorityData);
 
-    var options = {
+    var priorityOptions = {
       title: 'Tickets by Priority'
     };
 
-    var chart = new google.visualization.PieChart(document.getElementById('tickets-priority-piechart'));
+    var priorityChart = new google.visualization.PieChart(document.getElementById('tickets-priority-piechart'));
 
-    chart.draw(data, options);
-  }
+    priorityChart.draw(priorityData, priorityOptions);
 
-  function drawTicketsByStatusChart() {
+
+
+    // status chart
 
     var ticketsByStatusData = {{ tickets_by_status_data | safe }};
 
-    var data = google.visualization.arrayToDataTable(ticketsByStatusData);
+    var statusData = google.visualization.arrayToDataTable(ticketsByStatusData);
 
-    var options = {
+    var statusOptions = {
       title: 'Tickets by Status'
     };
 
-    var chart = new google.visualization.PieChart(document.getElementById('tickets-status-piechart'));
+    var statusChart = new google.visualization.PieChart(document.getElementById('tickets-status-piechart'));
 
-    chart.draw(data, options);
+    statusChart.draw(statusData, statusOptions);
   }
 </script>
 
