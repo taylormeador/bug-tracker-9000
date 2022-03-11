@@ -20,6 +20,7 @@ class Tickets(db.Model):
     description = db.Column(db.String(500))
     estimatedTime = db.Column(db.Integer)
     status = db.Column(db.String(50))
+    priority = db.Column(db.String(50))
     type = db.Column(db.String(50))
     project = db.Column(db.String(100))
     users = db.Column(db.String(500))
