@@ -129,8 +129,7 @@ def dashboard():
     user_email = session['profile']['name']
     projects = get_user_projects(user_email)
     return render_template('dashboard.html',
-                           userinfo=session['profile'],
-                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4),
+                           userinfo=session['profile'], userinfo_pretty=json.dumps(session['jwt_payload'], indent=4),
                            users=user_list, projects=projects)
 
 

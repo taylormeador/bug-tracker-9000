@@ -55,7 +55,7 @@
             <label for="projectSelectInput" class="form-label">Select Project</label>
               <select class="form-select" id="projectSelectInput" aria-label="multiple select example">
                 {% for project in projects %}
-                  <option value="{{ project }}">{{ project['projectName'] }}</option>
+                  <option value="{{ project['title'] }}">{{ project['title'] }}</option>
                 {% endfor %}
               </select>
           </div>
