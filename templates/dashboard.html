@@ -1,29 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
 
-      var ticketsByProjectData = {{ tickets_by_project_data|safe }};
+  function drawChart() {
 
-      console.log(ticketsByProjectData)
+    var ticketsByProjectData = {{ tickets_by_project_data | safe }};
+    console.log(typeof ticketsByProjectData);
 
-      function drawChart(ticketsByProjectData) {
+    var data = google.visualization.arrayToDataTable(ticketsByProjectData);
 
-        var data = google.visualization.arrayToDataTable(ticketsByProjectData);
-        console.log(data)
+    var options = {
+      title: 'Tickets by Project'
+    };
 
-        var options = {
-          title: 'Tickets by Project'
-        };
+    var chart = new google.visualization.PieChart(document.getElementById('tickets-project-piechart'));
 
-        var chart = new google.visualization.PieChart(document.getElementById('tickets-project-piechart'));
-
-        chart.draw(data, options);
-      }
-    </script>
+    chart.draw(data, options);
+  }
+</script>
 
 <div class="container shadow p-3 mb-5 bg-body rounded" id="projectsContainer">
     <div class="container" id="containerHeader">
