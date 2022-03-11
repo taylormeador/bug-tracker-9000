@@ -231,6 +231,7 @@ def complete_ticket():
 
     if request.method == 'GET':
         ticket_name = request.args.get('ticket-title')
+        print("ticket name: ", ticket_name)
         if ticket_name:
             # mark the ticket as complete
             ticket_row = Tickets.query.filter_by(name=ticket_name)
