@@ -181,5 +181,5 @@ def create_ticket():
         user_select = request.args.get('user-select')
         return """
         <body>{} {} {} {} 
-        {} {} {} {}
+        {} {} {}
         """.format(ticket_name, ticket_description, ticket_time, ticket_type, ticket_status, project_select, user_select)
