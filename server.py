@@ -50,10 +50,11 @@ data = res.read()
 data = json.loads(data.decode("utf-8"))
 MGMT_API_ACCESS_TOKEN = data['access_token']
 
-"""
-Returns a list of emails that are registered with Auth0
-"""
+
 def get_user_emails():
+    """
+    Returns a list of emails that are registered with Auth0
+    """
     # get json of users from auth0 management api
     conn = http.client.HTTPSConnection("dev--3rx-kw1.us.auth0.com")
     headers = {'authorization': "Bearer " + MGMT_API_ACCESS_TOKEN}
@@ -68,10 +69,11 @@ def get_user_emails():
     return user_list
 
 
-"""
-Takes an email address as an argument and returns a list of dictionaries conatining project info
-"""
+
 def get_user_projects(user):
+    """
+    Takes an email address as an argument and returns a list of dictionaries conatining project info
+    """
     user_projects_result = Projects.query.filter(Projects.projectContributors.contains(user)).all()
     projects = []
     for project in user_projects_result:
@@ -80,10 +82,11 @@ def get_user_projects(user):
     return projects
 
 
-"""
-Takes an email address as an argument and returns a list of dictionaries containing ticket info
-"""
+
 def get_user_tickets(user):
+    """
+    Takes an email address as an argument and returns a list of dictionaries containing ticket info
+    """
     user_tickets_result = Tickets.query.filter(Tickets.users.contains(user)).all()
     tickets = []
     for ticket in user_tickets_result:
@@ -184,9 +187,14 @@ def create_project():
         db.session.commit()
         return render_template('dashboard.html')
 
+
 @app.route('/createticket', methods=['GET'])
 @requires_authentication
 def create_ticket():
+    user_list = get_user_emails()
+    user_email = session['profile']['name']
+    projects = get_user_projects(user_email)
+    tickets = get_user_tickets(user_email)
     if request.method == 'GET':
         ticket_name = request.args.get('ticket-title')
         ticket_description = request.args.get('ticket-description')
@@ -196,7 +204,7 @@ def create_ticket():
         project_select = request.args.get('project-select')
         user_select = request.args.getlist('user-select')
         ticket_author = session['profile']['name']
-        # we want all users emails seperated by a space
+        # we want all users emails separated by a space
         users = ""
         for user in user_select:
             users += user + " "
@@ -206,4 +214,5 @@ def create_ticket():
                              status=ticket_status, project=project_select, users=users, author=ticket_author)
         db.session.add(new_ticket)
         db.session.commit()
-        return render_template('tickets.html')
+        return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
+    return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets)
