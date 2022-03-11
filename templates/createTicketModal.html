@@ -12,20 +12,20 @@
       <form action="/createticket" name="create-ticket-form" id="create-ticket-form" method="GET">
         <div class="modal-body">
           <div class="mb-3">
-            <label for="ticketTitleInput" class="form-label">Ticket Title</label>
-            <input class="form-control" id="ticketTitleInput" placeholder="New Ticket">
+            <label for="ticket-title-input" class="form-label">Ticket Title</label>
+            <input class="form-control" id="ticket-title-input" name="ticket-title" placeholder="New Ticket">
           </div>
           <div class="mb-3">
-            <label for="ticketDescriptionInput" class="form-label">Ticket Description</label>
-            <textarea class="form-control" id="ticketDescriptionInput" rows="3"></textarea>
+            <label for="ticket-description-input" class="form-label">Ticket Description</label>
+            <textarea class="form-control" id="ticket-description-input" name="ticket-description" rows="3"></textarea>
           </div>
               <div class="mb-3">
-                <label for="ticketTimeInput" class="form-label">Time Estimate</label>
-                <input class="form-control" id="ticketTimeInput" placeholder="1 hour">
+                <label for="ticket-time-input" class="form-label">Time Estimate</label>
+                <input class="form-control" id="ticket-time-input" name="ticket-time" placeholder="1 hour">
               </div>
               <div class="mb-3">
-                <label for="ticketTypeInput" class="form-label">Ticket Type</label>
-                  <select class="form-select" id="ticketTypeInput" aria-label="selectTicketType">
+                <label for="ticket-type-input" class="form-label">Ticket Type</label>
+                  <select class="form-select" id="ticket-type-input" name="ticket-type" aria-label="selectTicketType">
                     <option value="Bug">Bug</option>
                     <option value="Issue">Issue</option>
                     <option value="Feature Request">Feature Request</option>
@@ -33,8 +33,8 @@
               </div>
 
           <div class="mb-3">
-            <label for="ticketStatusInput" class="form-label">Ticket Status</label>
-              <select class="form-select" id="ticketStatusInput" aria-label="selectTicketStatus">
+            <label for="ticket-status-input" class="form-label">Ticket Status</label>
+              <select class="form-select" id="ticket-status-input" name="ticket-status" aria-label="selectTicketStatus">
                 <option value="New">New</option>
                 <option value="In Progress">In Progress</option>
                 <option value="Resolved">Resolved</option>
@@ -42,8 +42,8 @@
           </div>
 
           <div class="mb-3">
-            <label for="ticketPriorityInput" class="form-label">Ticket Priority</label>
-              <select class="form-select" id="ticketPriorityInput" aria-label="selectTicketPriority">
+            <label for="ticket-priority-input" class="form-label">Ticket Priority</label>
+              <select class="form-select" id="ticket-priority-input" name="ticket-priority" aria-label="selectTicketPriority">
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
@@ -52,8 +52,8 @@
           </div>
 
           <div class="mb-3">
-            <label for="projectSelectInput" class="form-label">Select Project</label>
-              <select class="form-select" id="projectSelectInput" aria-label="multiple select example">
+            <label for="project-select-input" class="form-label">Select Project</label>
+              <select class="form-select" id="project-select-input" name="project-select" aria-label="multiple select example">
                 {% for project in projects %}
                   <option value="{{ project['title'] }}">{{ project['title'] }}</option>
                 {% endfor %}
@@ -61,8 +61,8 @@
           </div>
 
           <div class="mb-3">
-            <label for="userSelectInput" class="form-label">Assign Personnel</label>
-              <select class="form-select" id="userSelectInput" multiple aria-label="multiple select example">
+            <label for="user-select-input" class="form-label">Assign Personnel</label>
+              <select class="form-select" id="user-select-input" name="user-select" multiple aria-label="multiple select example">
                 {% for user in users %}
                   <option value="{{ user }}">{{ user }}</option>
                 {% endfor %}

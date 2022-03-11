@@ -168,3 +168,18 @@ def createproject():
         db.session.commit()
         return render_template('dashboard.html')
 
+@app.route('/createticket', methods=['GET'])
+@requires_authentication
+def createproject():
+    if request.method == 'GET':
+        ticket_name = request.args.get('ticket-title')
+        ticket_description = request.args.get('ticket-description')
+        ticket_time = request.args.get('ticket-time')
+        ticket_type = request.args.get('ticket-type')
+        ticket_status = request.args.get('ticket-status')
+        project_select = request.args.get('project-select')
+        user_select = request.args.get('user-select')
+        return """
+        <body>{} {} {} {} 
+        {} {} {} {}
+        """.format(ticket_name, ticket_description, ticket_time, ticket_type, ticket_status, project_select, user_select)
