@@ -152,7 +152,7 @@ def admin():
 
 @app.route('/createproject', methods=['GET'])
 @requires_authentication
-def createproject():
+def create_project():
     if request.method == 'GET':
         project_name = request.args.get('projectName')
         project_description = request.args.get('projectDescription')
@@ -170,7 +170,7 @@ def createproject():
 
 @app.route('/createticket', methods=['GET'])
 @requires_authentication
-def createproject():
+def create_ticket():
     if request.method == 'GET':
         ticket_name = request.args.get('ticket-title')
         ticket_description = request.args.get('ticket-description')
