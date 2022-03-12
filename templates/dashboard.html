@@ -23,38 +23,6 @@
 
     projectChart.draw(projectData, projectOptions);
 
-
-
-
-    // priority chart
-
-    var ticketsByPriorityData = {{ tickets_by_priority_data | safe }};
-
-    var priorityData = google.visualization.arrayToDataTable(ticketsByPriorityData);
-
-    var priorityOptions = {
-      title: 'Tickets by Priority'
-    };
-
-    var priorityChart = new google.visualization.PieChart(document.getElementById('tickets-priority-piechart'));
-
-    priorityChart.draw(priorityData, priorityOptions);
-
-
-
-    // status chart
-
-    var ticketsByStatusData = {{ tickets_by_status_data | safe }};
-
-    var statusData = google.visualization.arrayToDataTable(ticketsByStatusData);
-
-    var statusOptions = {
-      title: 'Tickets by Status'
-    };
-
-    var statusChart = new google.visualization.PieChart(document.getElementById('tickets-status-piechart'));
-
-    statusChart.draw(statusData, statusOptions);
   }
 </script>
 
