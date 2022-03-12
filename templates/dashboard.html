@@ -5,9 +5,9 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(drawCharts);
+  google.charts.setOnLoadCallback(drawProjectChart);
 
-  function drawCharts() {
+  function drawProjectChart() {
 
     // project chart
 
@@ -22,6 +22,28 @@
     var projectChart = new google.visualization.PieChart(document.getElementById('tickets-project-piechart'));
 
     projectChart.draw(projectData, projectOptions);
+
+  }
+</script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawPriorityChart);
+
+  // priority chart
+
+  function drawPriorityChart() {
+
+    var ticketsByPriorityData = {{ tickets_by_priority_data | safe }};
+
+    var priorityData = google.visualization.arrayToDataTable(ticketsByPriorityData);
+
+    var priorityOptions = {
+      title: 'Tickets by Priority'
+    };
+
+    var priorityChart = new google.visualization.PieChart(document.getElementById('tickets-priority-piechart'));
+
+    priorityChart.draw(priorityData, priorityOptions);
 
   }
 </script>
