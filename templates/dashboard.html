@@ -7,6 +7,7 @@
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawProjectChart);
   google.charts.setOnLoadCallback(drawPriorityChart);
+  google.charts.setOnLoadCallback(drawStatusChart);
 
   function drawProjectChart() {
 
@@ -37,6 +38,22 @@
     var priorityChart = new google.visualization.PieChart(document.getElementById('tickets-priority-piechart'));
 
     priorityChart.draw(priorityData, priorityOptions);
+
+  }
+
+  function drawStatusChart() {
+
+    var ticketsByStatusData = {{ tickets_by_status_data | safe }};
+
+    var statusData = google.visualization.arrayToDataTable(ticketsByStatusData);
+
+    var statusOptions = {
+      title: 'Tickets by Status'
+    };
+
+    var statusChart = new google.visualization.PieChart(document.getElementById('tickets-status-piechart'));
+
+    statusChart.draw(statusData, statusOptions);
 
   }
 </script>
