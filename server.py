@@ -154,15 +154,15 @@ def dashboard():
         tickets_by_project_data.append([project['title'], project_tickets_count])
 
     tickets_by_priority_data = [['Priority', '# of Tickets'],
-                                ['Immediate', Tickets.query.filter_by(priority='Immediate')],
-                                ['High', Tickets.query.filter_by(priority='High')],
-                                ['Medium', Tickets.query.filter_by(priority='Medium')],
-                                ['Low', Tickets.query.filter_by(priority='Low')]]
+                                ['Immediate', Tickets.query.filter_by(priority='Immediate').count()],
+                                ['High', Tickets.query.filter_by(priority='High').count()],
+                                ['Medium', Tickets.query.filter_by(priority='Medium').count()],
+                                ['Low', Tickets.query.filter_by(priority='Low').count()]]
 
     tickets_by_status_data = [['Status', '# of Tickets'],
-                              ['New', Tickets.query.filter_by(status='New')],
-                              ['In Progress', Tickets.query.filter_by(status='In Progress')],
-                              ['Resolved', Tickets.query.filter_by(status='Resolved')]]
+                              ['New', Tickets.query.filter_by(status='New').count()],
+                              ['In Progress', Tickets.query.filter_by(status='In Progress').count()],
+                              ['Resolved', Tickets.query.filter_by(status='Resolved').count()]]
 
     return render_template('dashboard.html',
                            userinfo=session['profile'], userinfo_pretty=json.dumps(session['jwt_payload'], indent=4),
