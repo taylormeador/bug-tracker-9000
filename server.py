@@ -10,7 +10,7 @@ from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 import redis
 import http.client
-import datetime
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
@@ -222,7 +222,7 @@ def create_ticket():
         project_select = request.args.get('project-select')
         user_select = request.args.getlist('user-select')
         ticket_author = session['profile']['name']
-        ticket_datetime = datetime.datetime()
+        ticket_datetime = datetime.now()
         # add timestamps if the ticket is already working or finished
         working_datetime = None
         completed_datetime = None
