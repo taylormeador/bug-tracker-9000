@@ -263,12 +263,14 @@ def process_ticket():
             ticket_row = Tickets.query.filter_by(name=ticket_name).first()
             if command == "res":  # user clicked "Checkmark" button
                 ticket_row.status = "Resolved"
+                ticket_row.completed = datetime.now()
                 db.session.commit()
             if command == "del":  # user clicked "Trash" button
                 db.session.delete(ticket_row)
                 db.session.commit()
             if command == "wor":  # user clicked "Hammer" button
                 ticket_row.status = "In Progress"
+                ticket_row.working = datetime.now()
                 db.session.commit()
 
     # get new data for page re render
