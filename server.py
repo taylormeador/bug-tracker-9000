@@ -17,7 +17,7 @@ app.secret_key = os.getenv('FLASK_APP_SECRET')
 DATABASE_URL = os.getenv('JAWSDB_URL')
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 db = SQLAlchemy(app)
-from models import Projects, Users, Tickets
+from models import Projects, Tickets
 
 # Configure Redis for storing the session data on the server-side
 redis_url = os.getenv('REDISTOGO_URL')
