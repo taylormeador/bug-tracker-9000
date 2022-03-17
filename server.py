@@ -10,6 +10,7 @@ from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 import redis
 import http.client
+import datetime
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET')
@@ -103,7 +104,6 @@ def requires_authentication(f):
             # Redirect to Login page here
             return redirect('/login')
         return f(*args, **kwargs)
-
     return decorated
 
 
@@ -222,6 +222,14 @@ def create_ticket():
         project_select = request.args.get('project-select')
         user_select = request.args.getlist('user-select')
         ticket_author = session['profile']['name']
+        ticket_datetime = datetime.datetime()
+        # add timestamps if the ticket is already working or finished
+        working_datetime = None
+        completed_datetime = None
+        if ticket_status == "In Progress":
+            working_datetime = ticket_datetime
+        elif ticket_status == "Resolved":
+            completed_datetime = ticket_datetime
         # we want all users emails separated by a space
         users = ""
         for user in user_select:
@@ -229,7 +237,8 @@ def create_ticket():
         # add ticket to db
         new_ticket = Tickets(name=ticket_name, description=ticket_description, estimatedTime=ticket_time,
                              type=ticket_type, status=ticket_status, project=project_select, users=users,
-                             author=ticket_author, priority=ticket_priority)
+                             author=ticket_author, priority=ticket_priority, created=ticket_datetime,
+                             working=working_datetime, completed=completed_datetime)
         db.session.add(new_ticket)
         db.session.commit()
 

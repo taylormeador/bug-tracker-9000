@@ -9,11 +9,6 @@ class Projects(db.Model):
     projectManager = db.Column(db.String(50))
 
 
-class Users(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), nullable=False)
-
-
 class Tickets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
@@ -25,3 +20,6 @@ class Tickets(db.Model):
     project = db.Column(db.String(100))
     users = db.Column(db.String(500))
     author = db.Column(db.String(100))
+    created = db.Column(db.DateTime)
+    working = db.Column(db.DateTime)
+    completed = db.Column(db.DateTime)

@@ -25,3 +25,4 @@ authlib>=0.14.1
 six
 Flask-SQLAlchemy==2.5.1
 mysqlclient==2.1.0
+datetime
