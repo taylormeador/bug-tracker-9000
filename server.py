@@ -196,7 +196,7 @@ def create_project():
         project_name = request.args.get('projectName')
         project_description = request.args.get('projectDescription')
         project_contributors_list = request.args.getlist('selectUsers')
-        # we want all users emails seperated by a space
+        # we want all users emails separated by a space
         project_contributors = ""
         for contributor in project_contributors_list:
             project_contributors += contributor + " "
