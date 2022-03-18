@@ -27,7 +27,9 @@
               <td id="project">{{ ticket['project'] }}</td>
               <td id="description">{{ ticket['description'] }}</td>
               <td id="priority">{{ ticket['priority'] }}</td>
-              <td id="author" style="display:none;">{{ ticket['author'] }}"></td>
+              <td id="author" style="display:none;">{{ ticket['author'] }}</td>
+              <td id="status" style="display:none;">{{ ticket['status'] }}</td>
+              <td id="time" style="display:none;">{{ ticket['estimatedTime'] }}</td>
 
               <!-- Trashcan delete button -->
               <td>
@@ -78,24 +80,18 @@
       <div class="container">
         <div class="row">
           <div class="col" id="selected-title">
-            1 of 3
           </div>
           <div class="col" id="selected-project">
-            2 of 3
           </div>
           <div class="col" id="selected-author">
-            3 of 3
           </div>
         </div>
         <div class="row">
-          <div class="col">
-            1 of 3
+          <div class="col" id="selected-status">
           </div>
-          <div class="col">
-            2 of 3
+          <div class="col" id="selected-priority">
           </div>
-          <div class="col">
-            3 of 3
+          <div class="col" id="selected-time">
           </div>
         </div>
       </div>
@@ -131,6 +127,9 @@
           document.getElementById("selected-title").innerHTML = this.cells[0].innerHTML;
           document.getElementById("selected-project").innerHTML = this.cells[1].innerHTML;
           document.getElementById("selected-author").innerHTML = this.cells[4].innerHTML;
+          document.getElementById("selected-status").innerHTML = this.cells[5].innerHTML;
+          document.getElementById("selected-priority").innerHTML = this.cells[3].innerHTML;
+          document.getElementById("selected-time").innerHTML = this.cells[6].innerHTML;
           }
       };
   }
