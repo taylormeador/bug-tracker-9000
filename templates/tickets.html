@@ -27,6 +27,7 @@
               <td id="project">{{ ticket['project'] }}</td>
               <td id="description">{{ ticket['description'] }}</td>
               <td id="priority">{{ ticket['priority'] }}</td>
+              <td><input hidden type="text" ticket-author="{{ ticket['author'] }}"></input></td>
 
               <!-- Trashcan delete button -->
               <td>
@@ -77,10 +78,13 @@
       <div class="container">
         <div class="row">
           <div class="col" id="selected-title">
-            1 of 2
+            1 of 3
           </div>
-          <div class="col">
-            2 of 2
+          <div class="col" id="selected-project">
+            2 of 3
+          </div>
+          <div class="col" id="selected-author">
+            3 of 3
           </div>
         </div>
         <div class="row">
@@ -119,12 +123,14 @@
   {
       table.rows[i].onclick = function()
       {
-            for(var j = 0; j < this.cells.length; j ++)
-            {
-            console.log(j);
-            console.log(this.cells[j]);
-           //document.getElementById("selected-title").value = this.cells[0].innerHTML;
-           }
+          for(var j = 0; j < this.cells.length; j ++)
+          {
+          console.log(j);
+          console.log(this.cells[j]);
+          document.getElementById("selected-title").value = this.cells[0].innerHTML;
+          document.getElementById("selected-project").value = this.cells[1].innerHTML;
+          document.getElementById("selected-author").value = this.cells[4].innerHTML;
+          }
       };
   }
 
