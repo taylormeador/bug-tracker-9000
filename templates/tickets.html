@@ -23,10 +23,10 @@
         {% for ticket in tickets %}
           <tr>
             <form id="ticket-row" method="GET" action="/processticket">
-              <th scope="row">{{ ticket['title'] }}</th>
-              <td>{{ ticket['project'] }}</td>
-              <td>{{ ticket['description'] }}</td>
-              <td>{{ ticket['priority'] }}</td>
+              <th scope="row" id="title">{{ ticket['title'] }}</th>
+              <td id="project">{{ ticket['project'] }}</td>
+              <td id="description">{{ ticket['description'] }}</td>
+              <td id="priority">{{ ticket['priority'] }}</td>
 
               <!-- Trashcan delete button -->
               <td>
