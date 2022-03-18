@@ -127,9 +127,12 @@
           {
           console.log(j);
           console.log(this.cells[j]);
+          console.log(this.cells[j].innerHTML);
+          console.log(document.getElementById("selected-title").value);
           document.getElementById("selected-title").value = this.cells[0].innerHTML;
           document.getElementById("selected-project").value = this.cells[1].innerHTML;
           document.getElementById("selected-author").value = this.cells[4].innerHTML;
+          console.log(document.getElementById("selected-title").value);
           }
       };
   }
