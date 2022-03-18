@@ -27,7 +27,7 @@
               <td id="project">{{ ticket['project'] }}</td>
               <td id="description">{{ ticket['description'] }}</td>
               <td id="priority">{{ ticket['priority'] }}</td>
-              <td><input hidden type="text" ticket-author="{{ ticket['author'] }}"></input></td>
+              <td id="author" style="display:none;">{{ ticket['author'] }}"></td>
 
               <!-- Trashcan delete button -->
               <td>
