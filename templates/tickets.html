@@ -10,7 +10,7 @@
         {% include 'createTicketModal.html' %}
       </div>
     </div>
-    <table class="table table-striped">
+    <table class="table table-striped" id="tickets-table">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Ticket</th>
@@ -21,7 +21,7 @@
       </thead>
       <tbody overflow="auto" height="600px">
         {% for ticket in tickets %}
-          <tr>
+          <tr id="ticket-table-row">
             <form id="ticket-row" method="GET" action="/processticket">
               <th scope="row" id="title">{{ ticket['title'] }}</th>
               <td id="project">{{ ticket['project'] }}</td>
@@ -76,7 +76,7 @@
     <div class="container" id="selectedTicketInfoContainer">
       <div class="container">
         <div class="row">
-          <div class="col">
+          <div class="col" id="selected-title">
             1 of 2
           </div>
           <div class="col">
@@ -112,19 +112,17 @@
 </div>
 
 <script>
-  var elements= document.getElementsByTagName('tr');
 
-  for(var i=0; i<elements.length;i++) {
-    (elements)[i].addEventListener("click", function(){
+  var table = document.getElementById('tickets-table');
 
-    var html = this.innerHTML
-    ticketTitle = html.getElementById(title)
-
-    alert(ticketTitle);
-    // alert(this.innerHTML);
-
-    });
+  for(var i = 1; i < table.rows.length; i++)
+  {
+      table.rows[i].onclick = function()
+      {
+           document.getElementById("selected-title").value = this.cells[0].innerHTML;
+      };
   }
+
 </script>
 
 {% endblock %}
