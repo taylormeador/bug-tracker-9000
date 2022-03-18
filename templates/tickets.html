@@ -8,7 +8,7 @@
         {% include 'createTicketModal.html' %}
       </div>
     </div>
-    <table class="table table-striped" overflow="auto" height="600px">
+    <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Ticket</th>
@@ -17,7 +17,7 @@
           <th scope="col">Priority</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody overflow="auto" height="600px">
         {% for ticket in tickets %}
           <tr>
             <form id="ticket-row" method="GET" action="/processticket">
