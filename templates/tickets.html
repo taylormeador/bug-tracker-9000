@@ -153,10 +153,10 @@
 
           // set the selected ticket title in the form for comment submission
 
-          var ticketTitle = document.getElementById("ticket-title-form").innerHTML;
-          ticketTitle = document.getElementById("selected-title").innerHTML;
+          var ticketTitle = document.getElementById("selected-title").innerHTML;
+          document.getElementById("ticket-title-form").value = ticketTitle
           console.log(ticketTitle);
-          console.log(document.getElementById("ticket-title-form").innerHTML)
+          console.log(document.getElementById("ticket-title-form").value)
       };
   }
 
