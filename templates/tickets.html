@@ -2,14 +2,13 @@
 
 {% block content %}
 
-
-
 <div class="container shadow p-3 mb-5 bg-body rounded" id="projectsContainer">
     <div class="container" id="containerHeader">
       <div class="d-flex justify-content-end">
         {% include 'createTicketModal.html' %}
       </div>
     </div>
+  <div overflow="hidden" overflow-y="scroll" height="400px">
     <table class="table table-striped" id="tickets-table">
       <thead class="thead-dark">
         <tr>
@@ -65,6 +64,8 @@
         {% endfor %}
       </tbody>
     </table>
+  </div>
+
 </div>
 
 <div class="container shadow p-3 mb-5 bg-body rounded" id="selectedTicketContainer">

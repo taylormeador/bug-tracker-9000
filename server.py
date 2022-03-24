@@ -289,6 +289,4 @@ def process_comment():
     if request.method == 'POST':
         arg = request.form.get('comment-input')
 
-    return render_template("""
-    <body>{{ arg | safe }}</body> 
-    """)
+    return render_template('processcomment.html', arg=arg)
