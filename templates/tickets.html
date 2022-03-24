@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<div class="container shadow p-3 mb-5 bg-body rounded" id="projectsContainer">
-    <div class="container" id="containerHeader">
+<div class="container shadow p-3 mb-5 bg-body rounded" id="projects-container">
+    <div class="container" id="container-header">
       <div class="d-flex justify-content-end">
         {% include 'createTicketModal.html' %}
       </div>
@@ -18,21 +18,21 @@
           <th scope="col">Priority</th>
         </tr>
       </thead>
-      <tbody overflow="auto" height="600px">
+      <tbody>
         {% for ticket in tickets %}
-          <tr id="ticket-table-row">
-            <form id="ticket-row" method="GET" action="/processticket">
-              <th scope="row" id="title">{{ ticket['title'] }}</th>
-              <td id="project">{{ ticket['project'] }}</td>
-              <td id="description">{{ ticket['description'] }}</td>
-              <td id="priority">{{ ticket['priority'] }}</td>
-              <td id="author" style="display:none;">{{ ticket['author'] }}</td>
-              <td id="status" style="display:none;">{{ ticket['status'] }}</td>
-              <td id="time" style="display:none;">{{ ticket['time'] }}</td>
+          <tr class="ticket-table-row">
+            <form class="ticket-row" method="GET" action="/processticket">
+              <th scope="row" class="title">{{ ticket['title'] }}</th>
+              <td class="project">{{ ticket['project'] }}</td>
+              <td class="description">{{ ticket['description'] }}</td>
+              <td class="priority">{{ ticket['priority'] }}</td>
+              <td class="author" style="display:none;">{{ ticket['author'] }}</td>
+              <td class="status" style="display:none;">{{ ticket['status'] }}</td>
+              <td class="time" style="display:none;">{{ ticket['time'] }}</td>
 
               <!-- Trashcan delete button -->
               <td>
-                <button type="submit" form="ticket-row" name="ticket-title" value="del-{{ ticket['title'] }}" style="border:none; background-color: transparent;">
+                <button type="submit" name="ticket-title" value="del-{{ ticket['title'] }}" style="border:none; background-color: transparent;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                     <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -43,7 +43,7 @@
 
               <!-- Checkmark button -->
               <td>
-                <button type="submit" form="ticket-row" name="ticket-title" value="res-{{ ticket['title'] }}" style="border:none; background-color: transparent;">
+                <button type="submit" name="ticket-title" value="res-{{ ticket['title'] }}" style="border:none; background-color: transparent;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="{% if ticket['status'] == 'Resolved' %} #239F00 {% else %} currentColor {% endif %}" class="bi bi-check-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                     <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
@@ -53,7 +53,7 @@
 
               <!-- In Progress Hammer button -->
               <td>
-                <button type="submit" form="ticket-row" name="ticket-title" value="wor-{{ ticket['title'] }}" style="border:none; background-color: transparent;">
+                <button type="submit" name="ticket-title" value="wor-{{ ticket['title'] }}" style="border:none; background-color: transparent;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  fill="{% if ticket['status'] == 'New' %} currentColor {% else %} #239F00 {% endif %}" class="bi bi-hammer" viewBox="0 0 16 16">
                     <path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5.009 5.009 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334z"/>
                   </svg>
@@ -123,7 +123,7 @@
       <div class="input-group mb-3">
         <form action="/processcomment" method="post">
           <span>
-            <input style="hidden" id="ticket-title-form" name="ticket-title"></input>
+            <input type="hidden" id="ticket-title-form" name="ticket-title"></input>
             <input type="text" name="comment-input" class="form-control" placeholder="Enter comment" aria-label="comment-input" aria-describedby="basic-addon2">
             <button cass="btn btn-primary" type="submit">Comment</button>
           </span>
@@ -135,7 +135,7 @@
 
 <script>
 
-  var table = document.getElementById('tickets-table');
+  var table = document.getElementById("tickets-table");
 
   for(var i = 1; i < table.rows.length; i++)
   {
@@ -143,8 +143,6 @@
       {
           for(var j = 0; j < this.cells.length; j ++)
           {
-          console.log(j);
-          console.log(this.cells[j].innerHTML);
           document.getElementById("selected-title").innerHTML = this.cells[0].innerHTML;
           document.getElementById("selected-project").innerHTML = this.cells[1].innerHTML;
           document.getElementById("selected-author").innerHTML = this.cells[4].innerHTML;
@@ -152,12 +150,15 @@
           document.getElementById("selected-priority").innerHTML = this.cells[3].innerHTML;
           document.getElementById("selected-time").innerHTML = this.cells[6].innerHTML;
           }
+
+          // set the selected ticket title in the form for comment submission
+
+          var ticketTitle = document.getElementById("ticket-title-form").innerHTML;
+          console.log(ticketTitle);
+          ticketTitle = document.getElementById("selected-time").innerHTML;
+          console.log(ticketTitle);
       };
   }
-
-  // set the selected ticket title in the form for comment submission
-
-  document.getElementById('ticket-title-form').innerHTML = document.getElementById("selected-time").innerHTML;
 
 </script>
 
