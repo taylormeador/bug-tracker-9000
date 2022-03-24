@@ -120,15 +120,15 @@
       <div class="d-flex justify-content-start">
         <h5>Comments</h5>
       </div>
-      <div class="input-group mb-3">
-        <form action="/processcomment" method="post">
+      <form action="/processcomment" method="post">
+        <div class="input-group mb-3">
           <span>
             <input type="hidden" id="ticket-title-form" name="ticket-title"></input>
             <input type="text" name="comment-input" class="form-control" placeholder="Enter comment" aria-label="comment-input" aria-describedby="basic-addon2">
             <button cass="btn btn-primary" type="submit">Comment</button>
           </span>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -154,9 +154,9 @@
           // set the selected ticket title in the form for comment submission
 
           var ticketTitle = document.getElementById("ticket-title-form").innerHTML;
+          ticketTitle = document.getElementById("selected-title").innerHTML;
           console.log(ticketTitle);
-          ticketTitle = document.getElementById("selected-time").innerHTML;
-          console.log(ticketTitle);
+          console.log(document.getElementById("ticket-title-form").innerHTML)
       };
   }
 
