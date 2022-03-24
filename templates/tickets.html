@@ -8,14 +8,14 @@
         {% include 'createTicketModal.html' %}
       </div>
     </div>
-  <div overflow="hidden" overflow-y="scroll" height="400px">
+  <div overflow="hidden" overflow-y="scroll" height="100px">
     <table class="table table-striped" id="tickets-table">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Ticket</th>
           <th scope="col">Project</th>
           <th scope="col">Description</th>
-          <th scope="col">Priority</th>j
+          <th scope="col">Priority</th>
         </tr>
       </thead>
       <tbody overflow="auto" height="600px">
@@ -68,8 +68,8 @@
 
 </div>
 
-<div class="container shadow p-3 mb-5 bg-body rounded" id="selectedTicketContainer">
-  <div class="container" id="selectedTicketContainerHeader">
+<div class="container shadow p-3 mb-5 bg-body rounded" id="selected-ticket-container">
+  <div class="container" id="selected-ticket-container-header">
     <div class="d-flex justify-content-start">
       <h5>Selected Ticket Info</h5>
     </div>
@@ -123,10 +123,9 @@
       <div class="input-group mb-3">
         <form action="/processcomment" method="post">
           <span>
+            <input style="hidden" id="ticket-title-form" name="ticket-title"></input>
             <input type="text" name="comment-input" class="form-control" placeholder="Enter comment" aria-label="comment-input" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">Comment</button>
-              </div>
+            <button cass="btn btn-primary" type="submit">Comment</button>
           </span>
         </form>
       </div>
@@ -155,6 +154,10 @@
           }
       };
   }
+
+  // set the selected ticket title in the form for comment submission
+
+  document.getElementById('ticket-title-form').innerHTML = document.getElementById("selected-time").innerHTML;
 
 </script>
 

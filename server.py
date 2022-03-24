@@ -287,6 +287,7 @@ def process_ticket():
 def process_comment():
     # process request
     if request.method == 'POST':
-        arg = request.form.get('comment-input')
+        comment = request.form.get('comment-input')
+        ticket_title = request.form.get('ticket-title')
 
-    return render_template('processcomment.html', arg=arg)
+    return render_template('processcomment.html', comment=comment, ticket_title=ticket_title)
