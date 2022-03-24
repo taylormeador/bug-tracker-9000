@@ -16,7 +16,7 @@
           <th scope="col">Ticket</th>
           <th scope="col">Project</th>
           <th scope="col">Description</th>
-          <th scope="col">Priority</th>
+          <th scope="col">Priority</th>j
         </tr>
       </thead>
       <tbody overflow="auto" height="600px">
@@ -115,15 +115,17 @@
       </div>
     </div>
 
-    <div class="container" id="selectedTicketCommentContainer">
+    <div class="container" id="selected-ticket-comment-container">
       <div class="d-flex justify-content-start">
         <h5>Comments</h5>
       </div>
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Enter comment" aria-label="commentInput" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="submit">Comment</button>
-          </div>
+        <form action="/processcomment" method="post">
+          <input type="text" name="comment-input" class="form-control" placeholder="Enter comment" aria-label="comment-input" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit">Comment</button>
+            </div>
+        </form>
       </div>
     </div>
   </div>

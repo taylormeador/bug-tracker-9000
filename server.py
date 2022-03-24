@@ -280,3 +280,15 @@ def process_ticket():
     updated_tickets = get_user_tickets(user_email)
 
     return render_template('tickets.html', projects=projects, users=user_list, tickets=updated_tickets)
+
+
+@app.route('/processcomment', methods=['POST'])
+@requires_authentication
+def process_comment():
+    # process request
+    if request.method == 'POST':
+        arg = request.form.get('comment-input')
+
+    return """
+    <body>{{ arg }}</body> 
+    """
