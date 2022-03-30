@@ -4,7 +4,7 @@
 
 <div class="container shadow p-3 mb-5 bg-body rounded" id="projects-container">
     <div class="container" id="container-header">
-      <div class="d-flex justify-content-start" max-width="400px">
+      <div class="d-flex justify-content-start">
         <select class="form-select form-select-sm" aria-label="Default select example" id="projects-select" onchange="filterByProject()">
           <option value="" disabled selected>Filter Projects</option>
           {% for project in projects %}
@@ -14,8 +14,7 @@
         <span class="d-flex justify-content-end">
           {% include 'createTicketModal.html' %}
         </span>
-      </span>
-    </div>
+      </div>
     <table class="table table-striped" id="tickets-table">
       <thead class="thead-dark">
         <tr>
@@ -210,8 +209,10 @@
             break;
           case "Low":
             let x_priority = 1
+            break;
           default:
             let x_priority = 1
+            break;
         }
 
         switch(y.innerHTML) {
@@ -223,8 +224,10 @@
             break;
           case "Low":
             let y_priority = 1
+            break;
           default:
             let y_priority = 1
+            break;
         }
 
         // Check if the two rows should switch place:
