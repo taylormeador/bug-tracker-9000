@@ -8,7 +8,7 @@
         {% include 'createTicketModal.html' %}
       </div>
     </div>
-  <div overflow="hidden" overflow-y="scroll" height="100px">
+  <div overflow="auto" overflow-y="scroll" max-height="100px" display="inline-block">
     <table class="table table-striped" id="tickets-table">
       <thead class="thead-dark">
         <tr>
@@ -120,13 +120,11 @@
       <div class="d-flex justify-content-start">
         <h5>Comments</h5>
       </div>
-      <form action="/processcomment" method="post">
+      <form action="/processcomment" method="POST">
         <div class="input-group mb-3">
-          <span>
             <input type="hidden" id="ticket-title-form" name="ticket-title"></input>
             <input type="text" name="comment-input" class="form-control" placeholder="Enter comment" aria-label="comment-input" aria-describedby="basic-addon2">
             <button cass="btn btn-primary" type="submit">Comment</button>
-          </span>
         </div>
       </form>
     </div>
