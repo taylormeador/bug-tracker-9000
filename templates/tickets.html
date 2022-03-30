@@ -11,9 +11,9 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <select id="project-list" onchange="filterByProject()" class='form-control'>
-              {{% for project in projects %}}
+              {% for project in projects %}
                 <option class="dropdown-item">{{ project.title }}</option>
-              {{% endfor %}}
+              {% endfor %}
             </select>
           </div>
         </div>
