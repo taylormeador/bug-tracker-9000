@@ -4,15 +4,17 @@
 
 <div class="container shadow p-3 mb-5 bg-body rounded" id="projects-container">
     <div class="container" id="container-header">
-      <div class="d-flex justify-content-end">
-        <select class="form-select" aria-label="Default select example" id="projects-select" onchange="filterByProject()">
-          <option selected>Filter Projects</option>
+      <div class="d-flex justify-content-start">
+        <select class="form-select form-select-sm" aria-label="Default select example" id="projects-select" onchange="filterByProject()">
+          <option value="" disabled selected>Filter Projects</option>
           {% for project in projects %}
             <option value="{{ project.title }}">{{ project.title}}</option>
           {% endfor %}
         </select>
-        {% include 'createTicketModal.html' %}
-      </div>
+        <span class="d-flex justify-content-end">
+          {% include 'createTicketModal.html' %}
+        </span>
+      </span>
 
     </div>
   <div overflow="auto" overflow-y="scroll" max-height="100px" display="inline-block">
