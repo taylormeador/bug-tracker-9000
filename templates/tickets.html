@@ -4,31 +4,6 @@
 
 <script>
 
-  var table = document.getElementById("tickets-table");
-
-  for(var i = 1; i < table.rows.length; i++)
-  {
-      table.rows[i].onclick = function()
-      {
-          for(var j = 0; j < this.cells.length; j ++)
-          {
-          document.getElementById("selected-title").innerHTML = this.cells[0].innerHTML;
-          document.getElementById("selected-project").innerHTML = this.cells[1].innerHTML;
-          document.getElementById("selected-author").innerHTML = this.cells[4].innerHTML;
-          document.getElementById("selected-status").innerHTML = this.cells[5].innerHTML;
-          document.getElementById("selected-priority").innerHTML = this.cells[3].innerHTML;
-          document.getElementById("selected-time").innerHTML = this.cells[6].innerHTML;
-          }
-
-          // set the selected ticket title in the form for comment submission
-
-          var ticketTitle = document.getElementById("selected-title").innerHTML;
-          document.getElementById("ticket-title-form").value = ticketTitle
-          console.log(ticketTitle);
-          console.log(document.getElementById("ticket-title-form").value)
-      };
-  }
-
   function filterByProject() {
     var input, filter, table, tr, td, i;
     input = document.getElementById("projects-select");
@@ -68,31 +43,31 @@
         console.log(y)
         switch(x.innerHTML) {
           case "High":
-            let x_priority = 3
+            let x_priority = 3;
             break;
           case "Medium":
-            let x_priority = 2
+            let x_priority = 2;
             break;
           case "Low":
-            let x_priority = 1
+            let x_priority = 1;
             break;
           default:
-            let x_priority = 1
+            let x_priority = 1;
             break;
         }
 
         switch(y.innerHTML) {
           case "High":
-            let y_priority = 3
+            let y_priority = 3;
             break;
           case "Medium":
-            let y_priority = 2
+            let y_priority = 2;
             break;
           case "Low":
-            let y_priority = 1
+            let y_priority = 1;
             break;
           default:
-            let y_priority = 1
+            let y_priority = 1;
             break;
         }
 
@@ -249,6 +224,32 @@
   </div>
 </div>
 
+<script>
+  var table = document.getElementById("tickets-table");
 
+  for(var i = 1; i < table.rows.length; i++)
+  {
+      table.rows[i].onclick = function()
+      {
+          for(var j = 0; j < this.cells.length; j ++)
+          {
+          document.getElementById("selected-title").innerHTML = this.cells[0].innerHTML;
+          document.getElementById("selected-project").innerHTML = this.cells[1].innerHTML;
+          document.getElementById("selected-author").innerHTML = this.cells[4].innerHTML;
+          document.getElementById("selected-status").innerHTML = this.cells[5].innerHTML;
+          document.getElementById("selected-priority").innerHTML = this.cells[3].innerHTML;
+          document.getElementById("selected-time").innerHTML = this.cells[6].innerHTML;
+          }
+
+          // set the selected ticket title in the form for comment submission
+
+          var ticketTitle = document.getElementById("selected-title").innerHTML;
+          document.getElementById("ticket-title-form").value = ticketTitle
+          console.log(ticketTitle);
+          console.log(document.getElementById("ticket-title-form").value)
+      };
+  }
+
+</script>
 
 {% endblock %}
