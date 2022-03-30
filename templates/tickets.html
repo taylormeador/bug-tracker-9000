@@ -5,6 +5,18 @@
 <div class="container shadow p-3 mb-5 bg-body rounded" id="projects-container">
     <div class="container" id="container-header">
       <div class="d-flex justify-content-end">
+        <div class="dropdown" id="projects-dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filter Projects
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <select id="project-list" onchange="filterByProject()" class='form-control'>
+              {{% for project in projects %}}
+                <option class="dropdown-item">{{ project.title }}</option>
+              {{% endfor %}}
+            </select>
+          </div>
+        </div>
         {% include 'createTicketModal.html' %}
       </div>
     </div>
@@ -157,6 +169,25 @@
           console.log(document.getElementById("ticket-title-form").value)
       };
   }
+
+  function filterByProject() {
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("projects-dropdown");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tickets-table");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
 
 </script>
 
