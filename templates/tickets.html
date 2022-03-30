@@ -10,11 +10,11 @@
             Filter Projects
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <select id="project-list" onchange="filterByProject()" class='form-control'>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               {% for project in projects %}
-                <option class="dropdown-item">{{ project.title }}</option>
+                <a class="dropdown-item">{{ project.title }}</a>
               {% endfor %}
-            </select>
+            </div>
           </div>
         </div>
         {% include 'createTicketModal.html' %}
