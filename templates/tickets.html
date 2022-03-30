@@ -4,8 +4,7 @@
 
 <div class="container shadow p-3 mb-5 bg-body rounded" id="projects-container">
     <div class="container" id="container-header">
-      <div class="d-flex justify-content-end">
-        <div class="dropdown" id="projects-dropdown">
+      <div class="dropdown" id="projects-dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Filter Projects
           </button>
@@ -17,8 +16,12 @@
             </div>
           </div>
         </div>
+
+
+      <div class="d-flex justify-content-end">
         {% include 'createTicketModal.html' %}
       </div>
+
     </div>
   <div overflow="auto" overflow-y="scroll" max-height="100px" display="inline-block">
     <table class="table table-striped" id="tickets-table">
