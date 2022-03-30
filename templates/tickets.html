@@ -4,7 +4,7 @@
 
 <div class="container shadow p-3 mb-5 bg-body rounded" id="projects-container">
     <div class="container" id="container-header">
-      <div class="d-flex justify-content-start">
+      <div class="d-flex justify-content-start" max-width="400px">
         <select class="form-select form-select-sm" aria-label="Default select example" id="projects-select" onchange="filterByProject()">
           <option value="" disabled selected>Filter Projects</option>
           {% for project in projects %}
@@ -15,16 +15,14 @@
           {% include 'createTicketModal.html' %}
         </span>
       </span>
-
     </div>
-  <div overflow="auto" overflow-y="scroll" max-height="100px" display="inline-block">
     <table class="table table-striped" id="tickets-table">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Ticket</th>
           <th scope="col">Project</th>
           <th scope="col">Description</th>
-          <th scope="col">Priority</th>
+          <th scope="col" onclick="sortTable()">Priority</th>
         </tr>
       </thead>
       <tbody>
@@ -74,7 +72,6 @@
       </tbody>
     </table>
   </div>
-
 </div>
 
 <div class="container shadow p-3 mb-5 bg-body rounded" id="selected-ticket-container">
@@ -181,6 +178,67 @@
         } else {
           tr[i].style.display = "none";
         }
+      }
+    }
+  }
+
+  function sortTable() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("tickets-table");
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      switching = false;
+      rows = table.rows;
+      /* Loop through all table rows (except the
+      first, which contains table headers): */
+      for (i = 1; i < (rows.length - 1); i++) {
+        shouldSwitch = false;
+        /* Get the two elements you want to compare,
+        one from current row and one from the next: */
+        x = rows[i].getElementsByTagName("td")[0];
+        y = rows[i + 1].getElementsByTagName("td")[0];
+        console.log(x)
+        console.log(y)
+        switch(x.innerHTML) {
+          case "High":
+            let x_priority = 3
+            break;
+          case "Medium":
+            let x_priority = 2
+            break;
+          case "Low":
+            let x_priority = 1
+          default:
+            let x_priority = 1
+        }
+
+        switch(y.innerHTML) {
+          case "High":
+            let y_priority = 3
+            break;
+          case "Medium":
+            let y_priority = 2
+            break;
+          case "Low":
+            let y_priority = 1
+          default:
+            let y_priority = 1
+        }
+
+        // Check if the two rows should switch place:
+        if (x_priority > y_priority) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+      if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark that a switch has been done: */
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
       }
     }
   }
