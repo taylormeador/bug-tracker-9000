@@ -5,17 +5,16 @@
 <div class="container shadow p-3 mb-5 bg-body rounded" id="projects-container">
     <div class="container" id="container-header">
       <div class="dropdown" id="projects-dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Filter Projects
-          </button>
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Filter Projects
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              {% for project in projects %}
-                <a class="dropdown-item">{{ project.title }}</a>
-              {% endfor %}
-            </div>
+            <a class="dropdown-item">Test</a>
+            <a class="dropdown-item">Beaver Creek SCADA</a>
           </div>
         </div>
+      </div>
 
 
       <div class="d-flex justify-content-end">
