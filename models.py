@@ -23,3 +23,11 @@ class Tickets(db.Model):
     created = db.Column(db.DateTime)
     working = db.Column(db.DateTime)
     completed = db.Column(db.DateTime)
+
+
+class Tickets_Comments(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ticketID = db.Column(db.Integer)
+    comment = db.Column(db.String(500))
+    author = db.Column(db.String(100))
+    timestamp = db.Column(db.DateTime)

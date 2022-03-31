@@ -17,7 +17,7 @@ app.secret_key = os.getenv('FLASK_APP_SECRET')
 DATABASE_URL = os.getenv('JAWSDB_URL')
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 db = SQLAlchemy(app)
-from models import Projects, Tickets
+from models import Projects, Tickets, Tickets_Comments
 
 # Configure Redis for storing the session data on the server-side
 redis_url = os.getenv('REDISTOGO_URL')
@@ -289,5 +289,14 @@ def process_comment():
     if request.method == 'POST':
         comment = request.form.get('comment-input')
         ticket_title = request.form.get('ticket-title')
+        ticket_id = Tickets.query.filter_by(name=ticket_title).scalar()
+        print("ticket id: ", ticket_id)
+        author = session['profile']['name']
+        timestamp = datetime.now()
+
+        # add the new comment to the db
+        #new_comment = Tickets_Comments(ticketID=ticket_id, comment=comment, author=author, timestamp=timestamp)
+        #db.session.add(new_comment)
+        #db.session.commit()
 
     return render_template('processcomment.html', comment=comment, ticket_title=ticket_title)
