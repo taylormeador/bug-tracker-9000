@@ -124,6 +124,26 @@
     <div class="container" id="selected-ticket-comment-container">
       <div class="d-flex justify-content-start">
         <h5>Comments</h5>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Author</th>
+                <th scope="col">Timestamp</th>
+                <th scope="col">Comment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for comment in comments %}
+                <tr>
+                  <th scope="row">{{ comment.author }}</th>
+                  <td>{{ comment.timestamp }}</td>
+                  <td>{{ comment.comment }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
       </div>
       <form action="/processcomment" method="POST">
         <div class="input-group mb-3">

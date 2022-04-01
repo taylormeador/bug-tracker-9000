@@ -97,6 +97,18 @@ def get_user_tickets(user):
     return tickets_list
 
 
+def get_ticket_comments():
+    """
+    returns list of dictionaries with info from ticket_comments table
+    """
+    tickets_comments_result = TicketsComments.query.all()
+    comments_list = []
+    for comment in tickets_comments_result:
+        comments_list.append({'ticketID': comment.ticketID, 'comment': comment.comment,
+                              'author': comment.author, 'timestamp': comment.timestamp})
+    return comments_list
+
+
 def requires_authentication(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -178,7 +190,8 @@ def tickets():
     user_email = session['profile']['name']
     projects = get_user_projects(user_email)
     tickets_list = get_user_tickets(user_email)
-    return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets_list)
+    comments = get_ticket_comments()
+    return render_template('tickets.html', projects=projects, users=user_list, tickets=tickets_list, comments=comments)
 
 
 @app.route('/admin')
