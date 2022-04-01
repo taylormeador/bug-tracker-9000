@@ -191,10 +191,10 @@
           selectedTicketsTable = document.getElementById("selected-ticket-comments");
           tr = selectedTicketsTable.getElementsByTagName("tr");
           for (i = 0; i < tr.length; i++) {
+            console.log(tr[i])
             td = tr[i].getElementsByTagName("td")[0];
+            console.log[td]
             if (td) {
-              console.log(td.innerText);
-              console.log(td.innerText.toUpperCase().indexOf(ticketID));
               if (td.innerHTML.toUpperCase().indexOf(ticketID) == ticketID) {
                 tr[i].style.display = "";
               } else {
