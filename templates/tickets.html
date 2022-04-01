@@ -192,6 +192,8 @@
           for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[0];
             if (td) {
+              console.log(td.innerHTML);
+              console.log(td.innerHTML.toUpperCase().indexOf(ticketID));
               if (td.innerHTML.toUpperCase().indexOf(ticketID) == ticketID) {
                 tr[i].style.display = "";
               } else {
