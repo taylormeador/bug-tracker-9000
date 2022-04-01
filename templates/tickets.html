@@ -123,30 +123,33 @@
     </div>
 
     <div class="container" id="selected-ticket-comment-container">
+
       <div class="d-flex justify-content-start">
         <h5>Comments</h5>
-          <div id="selected-ticket-comments">
-            <table class="table table-borderless">
-              <thead>
-                <tr>
-                  <th scope="col">Author</th>
-                  <th scope="col">Timestamp</th>
-                  <th scope="col">Comment</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for comment in comments %}
-                  <tr>
-                    <th scope="row" style="display:none;">{{ comment.author }}</th>
-                    <td>{{ comment.timestamp }}</td>
-                    <td>{{ comment.comment }}</td>
-                    <td style="display:none;">{{ comment.ticketID }}</td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
       </div>
+
+      <div class="d-flex justify-content-start" id="selected-ticket-comments">
+        <table class="table table-borderless">
+          <thead>
+            <tr>
+              <th scope="col">Author</th>
+              <th scope="col">Timestamp</th>
+              <th scope="col">Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for comment in comments %}
+              <tr>
+                <th scope="row" style="display:none;">{{ comment.author }}</th>
+                <td>{{ comment.timestamp }}</td>
+                <td>{{ comment.comment }}</td>
+                <td style="display:none;">{{ comment.ticketID }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
       <form action="/processcomment" method="POST">
         <div class="input-group mb-3">
             <input type="hidden" id="ticket-title-form" name="ticket-title"></input>
@@ -185,17 +188,9 @@
           // filter comments to only show selected ticket's comments
           ticketID = this.cells[7].innerHTML;
           selectedTicketsTable = getElementById("selected-ticket-comments");
-          console.log("ticketID: ", ticketID)
+          console.log("ticketID: ", ticketID);
           tr = selectedTicketsTable.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-              td = tr[i].getElementsByTagName("td")[0];
-              if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(ticketID) > -1) {
-                  tr[i].style.display = "";
-                } else {
-                  tr[i].style.display = "none";
-                }
-              }
+          console.log("tr: ", tr);
       };
   }
 
