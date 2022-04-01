@@ -140,7 +140,7 @@
           <tbody>
             {% for comment in comments %}
               <tr>
-                <th scope="row" style="display:none;">{{ comment.author }}</th>
+                <td>{{ comment.author }}</td>
                 <td>{{ comment.timestamp }}</td>
                 <td>{{ comment.comment }}</td>
                 <td style="display:none;">{{ comment.ticketID }}</td>
@@ -188,9 +188,17 @@
           // filter comments to only show selected ticket's comments
           ticketID = this.cells[7].innerHTML;
           selectedTicketsTable = document.getElementById("selected-ticket-comments");
-          console.log("ticketID: ", ticketID);
           tr = selectedTicketsTable.getElementsByTagName("tr");
-          console.log("tr: ", tr);
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              if (td.innerHTML.toUpperCase().indexOf(ticketID) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
       };
   }
 
