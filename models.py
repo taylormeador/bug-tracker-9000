@@ -25,7 +25,7 @@ class Tickets(db.Model):
     completed = db.Column(db.DateTime)
 
 
-class Tickets_Comments(db.Model):
+class TicketsComments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     ticketID = db.Column(db.Integer)
     comment = db.Column(db.String(500))
