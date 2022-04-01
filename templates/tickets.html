@@ -191,16 +191,14 @@
           selectedTicketsTable = document.getElementById("selected-ticket-comments");
           tr = selectedTicketsTable.getElementsByTagName("tr");
           for (i = 0; i < tr.length; i++) {
-            console.log(tr[i])
             td = tr[i].getElementsByTagName("td")[2];
-            console.log(td);
             if (td) {
               console.log(td.innerHTML)
-              console.log(td.innerHTML.toUpperCase().indexOf(ticketID))
-              if (td.innerHTML.toUpperCase().indexOf(ticketID) == ticketID) {
+              console.log(td.innerHTML == ticketID)
+              if (td.innerHTML == ticketID) {
                 tr[i].style.display = "";
               } else {
-                tr[i].style.display = ""; //"none";
+                tr[i].style.display = "none";
               }
             }
           }
