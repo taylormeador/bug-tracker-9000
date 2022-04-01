@@ -35,6 +35,7 @@
               <td class="author" style="display:none;">{{ ticket['author'] }}</td>
               <td class="status" style="display:none;">{{ ticket['status'] }}</td>
               <td class="time" style="display:none;">{{ ticket['time'] }}</td>
+              <td class="id" style="display:none;">{{ ticket['id'] }}</td>
 
               <!-- Trashcan delete button -->
               <td>
@@ -124,26 +125,26 @@
     <div class="container" id="selected-ticket-comment-container">
       <div class="d-flex justify-content-start">
         <h5>Comments</h5>
-
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Author</th>
-                <th scope="col">Timestamp</th>
-                <th scope="col">Comment</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for comment in comments %}
+          <div id="selected-ticket-comments">
+            <table class="table table-borderless">
+              <thead>
                 <tr>
-                  <th scope="row">{{ comment.author }}</th>
-                  <td>{{ comment.timestamp }}</td>
-                  <td>{{ comment.comment }}</td>
+                  <th scope="col">Author</th>
+                  <th scope="col">Timestamp</th>
+                  <th scope="col">Comment</th>
                 </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-
+              </thead>
+              <tbody>
+                {% for comment in comments %}
+                  <tr>
+                    <th scope="row">{{ comment.author }}</th>
+                    <td>{{ comment.timestamp }}</td>
+                    <td>{{ comment.comment }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
       </div>
       <form action="/processcomment" method="POST">
         <div class="input-group mb-3">
@@ -157,6 +158,9 @@
 </div>
 
 <script>
+
+  // add onclick functions to ticket rows
+  // when clicked the ticket info will appear in the lower "ticket details" container
   var table = document.getElementById("tickets-table");
 
   for(var i = 1; i < table.rows.length; i++)
@@ -174,9 +178,22 @@
           }
 
           // set the selected ticket title in the form for comment submission
-
           var ticketTitle = document.getElementById("selected-title").innerHTML;
           document.getElementById("ticket-title-form").value = ticketTitle
+
+          // filter comments to only show selected ticket's comments
+          ticketID = this.cells[7].innerHTML;
+          selectedTicketsTable = getElementById("selected-ticket-comments");
+          tr = selectedTicketsTable.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[0];
+              if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(ticketID) > -1) {
+                  tr[i].style.display = "";
+                } else {
+                  tr[i].style.display = "none";
+                }
+              }
       };
   }
 

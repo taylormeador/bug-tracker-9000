@@ -92,7 +92,7 @@ def get_user_tickets(user):
     tickets_list = []
     for ticket in user_tickets_result:
         tickets_list.append({'title': ticket.name, 'description': ticket.description, 'time': ticket.estimatedTime,
-                             'status': ticket.status, 'type': ticket.type, 'project': ticket.project,
+                             'status': ticket.status, 'type': ticket.type, 'project': ticket.project, 'id': ticket.id,
                              'users': ticket.users, 'author': ticket.author, 'priority': ticket.priority})
     return tickets_list
 
