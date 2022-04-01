@@ -291,14 +291,12 @@ def process_comment():
         ticket_title = request.form.get('ticket-title')
         ticket = Tickets.query.filter_by(name=ticket_title).first()
         ticket_id = ticket.id
-        print("ticket id: ", ticket_id)
-        print("ticket id type: ", type(ticket_id))
         author = session['profile']['name']
         timestamp = datetime.now()
 
         # add the new comment to the db
-        #new_comment = Tickets_Comments(ticketID=ticket_id, comment=comment, author=author, timestamp=timestamp)
-        #db.session.add(new_comment)
-        #db.session.commit()
+        new_comment = Tickets_Comments(ticketID=ticket_id, comment=comment, author=author, timestamp=timestamp)
+        db.session.add(new_comment)
+        db.session.commit()
 
-    return render_template('processcomment.html', comment=comment, ticket_title=ticket_title)
+    return redirect('/tickets')
