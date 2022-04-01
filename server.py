@@ -289,8 +289,9 @@ def process_comment():
     if request.method == 'POST':
         comment = request.form.get('comment-input')
         ticket_title = request.form.get('ticket-title')
-        ticket_id = Tickets.query.filter_by(name=ticket_title).scalar()
+        ticket_id = Tickets.query.filter_by(name=ticket_title).first()
         print("ticket id: ", ticket_id)
+        print("ticket id type: ", type(ticket_id))
         author = session['profile']['name']
         timestamp = datetime.now()
 
