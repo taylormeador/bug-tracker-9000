@@ -192,9 +192,11 @@
           tr = selectedTicketsTable.getElementsByTagName("tr");
           for (i = 0; i < tr.length; i++) {
             console.log(tr[i])
-            td = tr[i].getElementsByTagName("td")[0];
+            td = tr[i].getElementsByTagName("td")[2];
             console.log(td);
             if (td) {
+              console.log(td.innerHTML)
+              console.log(td.innerHTML.toUpperCase().indexOf(ticketID))
               if (td.innerHTML.toUpperCase().indexOf(ticketID) == ticketID) {
                 tr[i].style.display = "";
               } else {
