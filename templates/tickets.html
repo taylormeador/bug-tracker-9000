@@ -137,9 +137,10 @@
               <tbody>
                 {% for comment in comments %}
                   <tr>
-                    <th scope="row">{{ comment.author }}</th>
+                    <th scope="row" style="display:none;">{{ comment.author }}</th>
                     <td>{{ comment.timestamp }}</td>
                     <td>{{ comment.comment }}</td>
+                    <td style="display:none;">{{ comment.ticketID }}</td>
                   </tr>
                 {% endfor %}
               </tbody>
@@ -179,11 +180,12 @@
 
           // set the selected ticket title in the form for comment submission
           var ticketTitle = document.getElementById("selected-title").innerHTML;
-          document.getElementById("ticket-title-form").value = ticketTitle
+          document.getElementById("ticket-title-form").value = ticketTitle;
 
           // filter comments to only show selected ticket's comments
           ticketID = this.cells[7].innerHTML;
           selectedTicketsTable = getElementById("selected-ticket-comments");
+          console.log("ticketID: ", ticketID)
           tr = selectedTicketsTable.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
               td = tr[i].getElementsByTagName("td")[0];
