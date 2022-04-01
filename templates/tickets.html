@@ -140,10 +140,10 @@
           <tbody>
             {% for comment in comments %}
               <tr>
-                <td>{{ comment.author }}</td>
-                <td>{{ comment.timestamp }}</td>
-                <td>{{ comment.comment }}</td>
-                <td style="display:none;">{{ comment.ticketID }}</td>
+                <th scope="row">{{ comment['author'] }}</th>
+                <td>{{ comment['timestamp'] }}</td>
+                <td>{{ comment['comment'] }}</td>
+                <td style="display:none;">{{ comment['ticketID'] }}</td>
               </tr>
             {% endfor %}
           </tbody>
