@@ -140,7 +140,7 @@
           </thead>
           <tbody>
             {% for comment in comments %}
-              <tr>
+              <tr style="display:none;">
                 <th scope="row">{{ comment['author'] }}</th>
                 <td>{{ comment['timestamp'] }}</td>
                 <td>{{ comment['comment'] }}</td>
@@ -193,8 +193,6 @@
           for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[2];
             if (td) {
-              console.log(td.innerHTML)
-              console.log(td.innerHTML == ticketID)
               if (td.innerHTML == ticketID) {
                 tr[i].style.display = "";
               } else {
